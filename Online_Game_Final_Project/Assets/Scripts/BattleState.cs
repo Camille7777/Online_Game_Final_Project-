@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 
-public class BattleState : Istate
+public class BattleState : MonoBehaviourPunCallbacks,Istate
 {
     public Transform BattleStateStartingPoint;
     public Transform BattleStateDestination;
@@ -25,7 +28,7 @@ public class BattleState : Istate
       //prepare this state assets
         PrepareBattleAssets();
 
-       // Debug.Log(BattleStateDestination.position);
+        Debug.Log(BattleStateDestination.position);
 
     }
 
@@ -36,13 +39,14 @@ public class BattleState : Istate
         //if never spawn any player
         if (!player_spawned)
         {
+            Playerslist.Add(PhotonNetwork.Instantiate(RealplayerPrefab.name, BattleStateStartingPoint.position, Quaternion.identity));
             // spawn the new proper players
-            for (int i = 0; i < 4; i++)
-            {
-                Playerslist.Add(GameObject.Instantiate(RealplayerPrefab, BattleStateStartingPoint.position, Quaternion.identity) as GameObject);
-                Playerslist[i].name = "player_" + i;
-                // Playerslist[0].setActive(false); //This sets the first healthpack inactive. And works on either arrays or List.
-            }
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    Playerslist.Add(GameObject.Instantiate(RealplayerPrefab, BattleStateStartingPoint.position, Quaternion.identity) as GameObject);
+            //    Playerslist[i].name = "player_" + i;
+            //    // Playerslist[0].setActive(false); //This sets the first healthpack inactive. And works on either arrays or List.
+            //}
 
             //player spawned
             player_spawned = true;

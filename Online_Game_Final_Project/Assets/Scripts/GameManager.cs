@@ -2,13 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
 
     private StateMachine stateMachine;
     private PreBuildState build = new PreBuildState();
     private BattleState battle = new BattleState();
+
+
 
     #region Assets for PrebuildScene
     public Transform spawnLocation;
@@ -24,13 +29,20 @@ public class GameManager : MonoBehaviour
     public float BattleState_TimerLimit=30f;
     #endregion
 
+    public static GameManager instance;
 
     private void Awake()
     {
-       
-        
-
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
+   
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +54,11 @@ public class GameManager : MonoBehaviour
         //playerTransparentPrefab = Resources.Load("Invi_player") as GameObject;
 
         stateMachine = GetComponent<StateMachine>();
-        GotoPrebuild();
+        if (PhotonNetwork.IsConnected)
+        {
+            GotoPrebuild();
+        }
+      
     }
 
     // Update is called once per frame
@@ -53,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     private void GotoPrebuild()
     {
-      
         stateMachine.changeState(Build());
     }
 
@@ -85,8 +100,7 @@ public class GameManager : MonoBehaviour
         //go to lost state first
 
         //then only go build again
-      
-        stateMachine.changeState(Build());
+         stateMachine.changeState(Build());
     }
 
 
@@ -114,5 +128,25 @@ public class GameManager : MonoBehaviour
         return battle;
     }
 
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " " + PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("GameLauncherScene");
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
 
 }
