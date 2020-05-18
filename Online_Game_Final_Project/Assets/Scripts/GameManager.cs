@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform spawnLocation;
     public GameObject playerTransparentPrefab;
     public GameObject[] traps;
-    public float buildStateTimeLimit = 5f;
+    public float buildStateTimeLimit = 10f;
     #endregion
 
     #region Assets for Battle
@@ -136,7 +136,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private BattleState Battle()
     {
-         battle.BattleStateStartingPoint=BattleStateStartingPoint;
+        //run all the scripts attached on the traps
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
+        {
+            obj.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+        battle.BattleStateStartingPoint=BattleStateStartingPoint;
         battle.BattleStateDestination= BattleStateDestination;
          battle.RealplayerPrefab=RealplayerPrefab;
         battle.BattleState_TimeLimit= BattleState_TimerLimit;
