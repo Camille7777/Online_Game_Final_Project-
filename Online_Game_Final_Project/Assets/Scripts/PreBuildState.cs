@@ -17,13 +17,14 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
     private GameObject Objplayer_2;
     private GameObject Objplayer_3;
     private GameObject Objplayer_4;
-    public GameObject[] Generatedtraps;
+    
     public float buildStateTimeLimit ;
     private float timer;
    
-    List<GameObject> objectPlayers = new List<GameObject>();
-    List<GameObject> objectPlayers_trap_belongings = new List<GameObject>();
-    private PhotonView pv;
+    
+    
+ 
+
 
     public void onStateEnter()
     {
@@ -36,7 +37,7 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
         // playerTransparentPrefab = Resources.Load("Invi_player") as GameObject;
 
         ////spwan four player prefabs to spawnlocation
-         InstantiateAssets();
+        // InstantiateAssets();
         //SpawnPlayer();
        
         
@@ -53,34 +54,14 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
     
     private void InstantiateAssets()
     {
-        if (playerTransparentPrefab != null)
-        {
+       
 
 
-            //Objplayer_1 = PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity);
-            //Objplayer_1.name = "Objplayer_1";
-            //GameObject.Instantiate(traps[0], Objplayer_1.transform.position, Quaternion.identity, Objplayer_1.transform);
+            
 
-            objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
-            objectPlayers_trap_belongings.Add(PhotonNetwork.Instantiate(traps[0].name, spawnLocation.position, Quaternion.identity));
-
-            pv = objectPlayers_trap_belongings[objectPlayers_trap_belongings.Count - 1].GetComponent<PhotonView>();
-
-            if(pv)
-            {
-                Debug.Log("getted");
-            }
-            else
-            {
-                Debug.Log(" no get");
-            }
+       
         
-
-
-            if (pv.IsMine)
-            {
-                objectPlayers_trap_belongings[objectPlayers_trap_belongings.Count - 1].transform.SetParent(objectPlayers[objectPlayers.Count - 1].transform);
-            }
+            
            
 
             //for (int i=0;i<objectPlayers.Count;i++)
@@ -98,7 +79,7 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
 
            
 
-        }
+        
 
         //Objplayer_1 = GameObject.Instantiate(playerTransparentPrefab, spawnLocation.position, Quaternion.identity);
         //Objplayer_1.name = "Objplayer_1";
@@ -124,20 +105,31 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
 
     }
 
-    //[PunRPC]
-    //private void RPC_InstantiateCloth(int parentViewId)
-    //{
-    //    GameObject parentObject = PhotonView.Find(parentViewId).gameObject;
-    //    GameObject clone = Instantiate(traps[0], spawnLocation.position, Quaternion.identity);
-    //    clone.transform.parent = parentObject.transform;
-    //}
+   //[PunRPC]
+   //private void AddcustomChild(int whichprefab, object[] objectArray)
+   //{
+   //     prefab_value= whichprefab;
+   //     Debug.Log(prefab_value);
+        
+        
+   //     GameObject trap_1=GameObject.Instantiate(traps[whichprefab], objectPlayers[objectPlayers_count-1].transform.position, Quaternion.identity);
+   //    // GameObject trap_1 = GameObject.Instantiate(traps[whichprefab],transform.position, Quaternion.identity);
+
+   //     //objectPlayers_trap_belongings.Add(PhotonNetwork.Instantiate(trap.name, transform.position, Quaternion.identity));
+
+
+   //     //Debug.Log("is here");
+       
+
+   //    trap_1.transform.parent=objectPlayers[objectPlayers_count-1].transform;
+   // }
 
     //public void SpawnPlayer()
     //{
     //    byte evCode = 123; // Custom Event 1: Used as "MoveUnitsToTargetPosition" event
 
     //    GameObject player =GameObject.Instantiate(playerTransparentPrefab);
-        
+
     //    GameObject.Instantiate(traps[0], player.transform.position, Quaternion.identity, player.transform);
 
     //    objectPlayers.Add(player);
@@ -203,11 +195,17 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
 
 
             // instruct all the object player to stop moving
-            foreach (GameObject objectPly in objectPlayers)
+            foreach (GameObject objectPly in GameManager.instance.objectPlayers)
             {
                 //halt the move
 
                 objectPly.GetComponent<ObjMovementController>().speed = 0;
+
+                //destoy the objmovement script
+                if (objectPly.GetComponent<ObjMovementController>()!=null)
+                {
+                    Destroy(objectPly.GetComponent<ObjMovementController>());
+                }
 
                 //stop the camera
                 objectPly.transform.GetChild(0).gameObject.SetActive(false);

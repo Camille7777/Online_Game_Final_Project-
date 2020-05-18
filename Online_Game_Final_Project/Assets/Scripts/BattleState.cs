@@ -14,7 +14,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
     public float BattleState_Timer;
     public float BattleState_TimeLimit;
     public GameObject RealplayerPrefab;
-    List<GameObject> Playerslist = new List<GameObject>();
+    
     public Action WinCallBack;
     public Action LostCallBack;
     private bool player_spawned = false;
@@ -39,7 +39,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         //if never spawn any player
         if (!player_spawned)
         {
-            Playerslist.Add(PhotonNetwork.Instantiate(RealplayerPrefab.name, BattleStateStartingPoint.position, Quaternion.identity));
+            GameManager.instance.Playerslist.Add(PhotonNetwork.Instantiate(RealplayerPrefab.name, BattleStateStartingPoint.position, Quaternion.identity));
             // spawn the new proper players
             //for (int i = 0; i < 4; i++)
             //{
@@ -54,7 +54,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         else
         { //else no need spawn alrd but need to regain control
 
-            foreach (GameObject Player in Playerslist)
+            foreach (GameObject Player in GameManager.instance.Playerslist)
             {
                 //revoke the move
 
@@ -87,7 +87,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
 
 
-            foreach (GameObject Player in Playerslist)
+            foreach (GameObject Player in GameManager.instance.Playerslist)
             {
 
                 //halt the move
@@ -112,7 +112,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
             //else 
 
 
-            foreach (GameObject Player in Playerslist)
+            foreach (GameObject Player in GameManager.instance.Playerslist)
             {
                 //if one of players reach destination
                 if ((Player.transform.position - BattleStateDestination.position).magnitude < 2f)

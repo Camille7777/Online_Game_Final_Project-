@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FPSCamera: {fileID: 3057488835051843122}
   playerNameText: {fileID: 7432366141051859614}
+  prefab_value: 0
 --- !u!1 &3057488835051843122
 GameObject:
   m_ObjectHideFlags: 0

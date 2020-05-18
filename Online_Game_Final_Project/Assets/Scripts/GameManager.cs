@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     private StateMachine stateMachine;
     private PreBuildState build = new PreBuildState();
     private BattleState battle = new BattleState();
-
+    public List<GameObject> objectPlayers = new List<GameObject>();
+    public List<GameObject> Playerslist = new List<GameObject>();
+    public int assignned_child_trap=0;
 
 
     #region Assets for PrebuildScene
@@ -56,6 +58,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         stateMachine = GetComponent<StateMachine>();
         if (PhotonNetwork.IsConnected)
         {
+            if (playerTransparentPrefab != null)
+            {
+
+                objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
+            }
+
             GotoPrebuild();
         }
       
@@ -69,6 +77,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void GotoPrebuild()
     {
+       
         stateMachine.changeState(Build());
     }
 
@@ -97,10 +106,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Battle state is end");
         Debug.Log("Battle state is lost");
 
-        //go to lost state first
 
+        //go to lost state first
+        //spwan obj again
+       
+        if (playerTransparentPrefab != null)
+        {
+
+            objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
+        }
         //then only go build again
-         stateMachine.changeState(Build());
+        stateMachine.changeState(Build());
     }
 
 
