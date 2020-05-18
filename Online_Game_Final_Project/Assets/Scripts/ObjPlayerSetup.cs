@@ -38,7 +38,7 @@ public class ObjPlayerSetup : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GameManager.instance.RandomTrap();
-            photonView.RPC("AddcustomChild", RpcTarget.AllBuffered, GameManager.instance.assignned_child_trap);
+            photonView.RPC("AddcustomChild", RpcTarget.AllBuffered, GameManager.instance.assignned_child_trap);//1
         }
     }
 

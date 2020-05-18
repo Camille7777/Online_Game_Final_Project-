@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("build state is end");
         //gotobattle state
         stateMachine.changeState(Battle());
+        
         Debug.Log("batttle state is start");
     }
 
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
         //go to lost state first
+
         //spwan obj again
        
         if (playerTransparentPrefab != null)
