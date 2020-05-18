@@ -1,29 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class LFZ_CloudGenerator : MonoBehaviour
+public class LFZ_CloudGenerator : MonoBehaviourPunCallbacks
 {
     public GameObject platform;
-    Vector3 pos;
+    public Transform position;
     public static LFZ_CloudGenerator instance;
+    private float timelimit = 10;
+    private float timer ;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        pos = platform.transform.position;
 
+        timer = 0;
         //随机
 
-        InvokeRepeating("SpawnPlatform", 1f, 7f);
+       
 
     }
 
 
     void SpawnPlatform()
     {
-        Instantiate(platform, pos, Quaternion.identity);
+        PhotonNetwork.Instantiate(platform.name, this.transform.position, Quaternion.identity);
+    }
+
+    private void Update()
+    {
+        position.position = platform.transform.position;
+        timer+=Time.deltaTime * 1;
+        if(timer>timelimit)
+        {
+            timer = 0;
+            SpawnPlatform();
+        }
     }
 
 

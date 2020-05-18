@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class LFZ_Cloud : MonoBehaviour
+public class LFZ_Cloud : MonoBehaviourPunCallbacks
 {
     [SerializeField]//we gonna expose this variable in the editor 
     private float speed;
@@ -17,7 +18,7 @@ public class LFZ_Cloud : MonoBehaviour
     void Start()
     {
         rb.velocity = new Vector3(0, 0, speed);
-        Invoke("FallDestroy", 10f);
+       Invoke("FallDestroy", 10f);
     }
 
     // Update is called once per frame
@@ -29,6 +30,6 @@ public class LFZ_Cloud : MonoBehaviour
     void FallDestroy()
     {
         rb.useGravity = true;
-        Destroy(transform.gameObject, 0.5f);
+        PhotonNetwork.Destroy(transform.gameObject);
     }
 }
