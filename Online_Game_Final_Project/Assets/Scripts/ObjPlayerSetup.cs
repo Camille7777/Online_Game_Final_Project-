@@ -49,7 +49,7 @@ public class ObjPlayerSetup : MonoBehaviourPunCallbacks
 
 
         GameObject trap_1 = GameObject.Instantiate(GameManager.instance.traps[whichprefab],transform.position, Quaternion.identity,this.transform);
-        this.transform.name="Player"+ photonView.Owner.NickName;
+        this.transform.name="ObjPlayer_"+ photonView.Owner.NickName;
         // GameObject trap_1 = GameObject.Instantiate(traps[whichprefab],transform.position, Quaternion.identity);
 
         //objectPlayers_trap_belongings.Add(PhotonNetwork.Instantiate(trap.name, transform.position, Quaternion.identity));

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 918318092033151190}
   - component: {fileID: 2214273729544392437}
   - component: {fileID: 6094649164162503867}
-  - component: {fileID: -589708251475404299}
-  - component: {fileID: 2614375991071152028}
+  - component: {fileID: 1702996639569384655}
+  - component: {fileID: -540803042627341784}
   m_Layer: 0
   m_Name: prefab_1
   m_TagString: Untagged
@@ -93,7 +93,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-589708251475404299
+--- !u!114 &1702996639569384655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,11 +111,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 2614375991071152028}
+  - {fileID: -540803042627341784}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2614375991071152028
+--- !u!114 &-540803042627341784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
