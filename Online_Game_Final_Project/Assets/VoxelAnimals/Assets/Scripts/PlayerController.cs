@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
 
     public float movementSpeed = 3;
     public float jumpForce = 300;
@@ -11,11 +12,15 @@ public class PlayerController : MonoBehaviour
     private float canJump = 0f;
     Animator anim;
     Rigidbody rb;
+
+    public bool isWalk;
     
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+
+        isWalk = false;
     }
 
     void Update()
@@ -25,21 +30,22 @@ public class PlayerController : MonoBehaviour
 
     void ControllPlayer()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        //float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        //float moveVertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
-        if (movement != Vector3.zero)
+        
+        if (isWalk)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
             anim.SetInteger("Walk", 1);
         }
         else {
             anim.SetInteger("Walk", 0);
         }
 
-        transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+        //transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
 
         if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {

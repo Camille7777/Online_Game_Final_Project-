@@ -21,10 +21,17 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody rb;
     public PlayerMovementController instance = null;
 
+    public float jumpForce = 300;
+    public float timeBeforeNextJump = 1.2f;
+    private float canJump = 0f;
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
         if (instance==null)
         {
             instance = this;
@@ -60,6 +67,7 @@ public class PlayerMovementController : MonoBehaviour
 
         //Apply rotation 
         RotateCamera(_cameraUpDownRotation);
+
     }
 
     //runs per physics iteration
@@ -68,7 +76,20 @@ public class PlayerMovementController : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            anim.SetInteger("Walk", 1);
         }
+        else
+        {
+            anim.SetInteger("Walk", 0);
+        }
+
+        if (Input.GetButtonDown("Jump") && Time.time > canJump)
+        {
+            rb.AddForce(0, jumpForce, 0);
+            canJump = Time.time + timeBeforeNextJump;
+            anim.SetTrigger("jump");
+        }
+
 
         rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
 

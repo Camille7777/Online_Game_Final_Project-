@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform spawnLocation;
     public GameObject playerTransparentPrefab;
     public GameObject[] traps;
-    public float buildStateTimeLimit = 20f;
+    public float buildStateTimeLimit = 5f;
     #endregion
 
     #region Assets for Battle
     public Transform BattleStateStartingPoint;
     public Transform BattleStateDestination;
     public GameObject RealplayerPrefab;
-    public float BattleState_TimerLimit=30f;
+    public float BattleState_TimerLimit=120f;
     #endregion
 
     public static GameManager instance;
@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         //then only go build again
         stateMachine.changeState(Build());
+
     }
 
 
