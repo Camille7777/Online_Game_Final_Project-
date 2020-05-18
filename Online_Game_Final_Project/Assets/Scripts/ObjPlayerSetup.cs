@@ -45,10 +45,11 @@ public class ObjPlayerSetup : MonoBehaviourPunCallbacks
     private void AddcustomChild(int whichprefab)
     {
         prefab_value = whichprefab;
-        Debug.Log(prefab_value);
+        //Debug.Log(prefab_value);
 
 
         GameObject trap_1 = GameObject.Instantiate(GameManager.instance.traps[whichprefab],transform.position, Quaternion.identity,this.transform);
+        this.transform.name="Player"+ photonView.Owner.NickName;
         // GameObject trap_1 = GameObject.Instantiate(traps[whichprefab],transform.position, Quaternion.identity);
 
         //objectPlayers_trap_belongings.Add(PhotonNetwork.Instantiate(trap.name, transform.position, Quaternion.identity));

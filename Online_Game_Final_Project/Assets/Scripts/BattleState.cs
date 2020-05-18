@@ -58,7 +58,8 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
             {
                 //revoke the move
 
-                Player.GetComponent<PlayerMovementController>().speed = 8;
+               // Player.GetComponent<PlayerMovementController>().speed=8;
+                Player.GetComponent<PlayerMovementController>().enabled = true;
 
                 //enable the camera
                 Player.transform.GetChild(0).gameObject.SetActive(true);
@@ -91,8 +92,12 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
             {
 
                 //halt the move
-
-                Player.GetComponent<PlayerMovementController>().speed = 0;
+                if (Player.GetComponent<PlayerMovementController>()!=null)
+                {
+                    // Player.GetComponent<PlayerMovementController>().speed = 0;
+                    Player.GetComponent<PlayerMovementController>().enabled = false;
+                }
+               
 
                 //stop the camera
                 Player.transform.GetChild(0).gameObject.SetActive(false);

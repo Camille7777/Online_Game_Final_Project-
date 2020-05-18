@@ -199,7 +199,7 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
             {
                 //halt the move
 
-                objectPly.GetComponent<ObjMovementController>().speed = 0;
+               // objectPly.GetComponent<ObjMovementController>().speed = 0;
 
                 //destoy the objmovement script
                 if (objectPly.GetComponent<ObjMovementController>()!=null)
