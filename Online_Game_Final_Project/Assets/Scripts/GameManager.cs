@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (playerTransparentPrefab != null)
             {
-
                 objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
             }
 
@@ -144,6 +143,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         return battle;
     }
 
+    public void RandomTrap()
+    {
+        int RandomTrap = UnityEngine.Random.Range(0, traps.Length);
+        assignned_child_trap = RandomTrap;
+    }
 
     public override void OnJoinedRoom()
     {
