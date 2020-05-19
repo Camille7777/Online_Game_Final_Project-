@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform BattleStateStartingPoint;
     public Transform BattleStateDestination;
     public GameObject RealplayerPrefab;
+    public GameObject[] playerselection;
     public float BattleState_TimerLimit=120f;
     #endregion
 

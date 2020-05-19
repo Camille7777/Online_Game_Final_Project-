@@ -26,24 +26,26 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         BattleState_Timer = 0;
 
       //prepare this state assets
-        PrepareBattleAssets();
+        PrepareBattleAssets(RandomPlayer());
 
         Debug.Log(BattleStateDestination.position);
 
     }
 
-    private void PrepareBattleAssets()
+    private void PrepareBattleAssets(int whichprefab)
     {
 
         
         //if never spawn any player
         if (!player_spawned)
         {
-            GameManager.instance.Playerslist.Add(PhotonNetwork.Instantiate(RealplayerPrefab.name, BattleStateStartingPoint.position, Quaternion.identity));
+
             // spawn the new proper players
             //for (int i = 0; i < 4; i++)
             //{
             //    Playerslist.Add(GameObject.Instantiate(RealplayerPrefab, BattleStateStartingPoint.position, Quaternion.identity) as GameObject);
+
+            GameManager.instance.Playerslist.Add(PhotonNetwork.Instantiate(GameManager.instance.playerselection[whichprefab].name, BattleStateStartingPoint.position, Quaternion.identity));
             //    Playerslist[i].name = "player_" + i;
             //    // Playerslist[0].setActive(false); //This sets the first healthpack inactive. And works on either arrays or List.
             //}
@@ -75,6 +77,8 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
 
     }
+
+   
 
     public void onStateUpdate()
     {
@@ -158,6 +162,12 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
     }
 
+    public int RandomPlayer()
+    {
+        int Randomindex = UnityEngine.Random.Range(0, GameManager.instance.traps.Length);
+        Debug.Log(Randomindex);
+        return Randomindex;
+    }
 
 
 
