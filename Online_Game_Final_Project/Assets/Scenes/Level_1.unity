@@ -27834,10 +27834,10 @@ MonoBehaviour:
   playerTransparentPrefab: {fileID: 2530989793619151525, guid: 44ce20e27f6ee144080258a89e780fa9,
     type: 3}
   traps:
-  - {fileID: 76827259105302358, guid: aa94a2115c30dc345bf55b4f6f3ccc22, type: 3}
-  - {fileID: 416120305038880662, guid: 8f7316a65b4c3a64b9ae75023f622f58, type: 3}
-  - {fileID: 1535511207799139710, guid: de800f086011c0740a137a40f9122cdb, type: 3}
-  - {fileID: 1041665156121195466, guid: d52766d72a6b12f4d92af08e212ccc00, type: 3}
+  - {fileID: 1249056311682516513, guid: 822496211813f754d8e9aad9a48c7c95, type: 3}
+  - {fileID: 3291769366055320034, guid: e8e5614434b93c344a4399ee0a7bed70, type: 3}
+  - {fileID: 580883686353382687, guid: f8fbe158fc2278c41a2e46e65452c931, type: 3}
+  - {fileID: 4341174075188769281, guid: bb9f5785ec4c0ca44875964523a471a0, type: 3}
   buildStateTimeLimit: 20
   BattleStateStartingPoint: {fileID: 486638068}
   BattleStateDestination: {fileID: 673405321}

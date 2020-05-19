@@ -14,7 +14,7 @@ public class ZMDFan : MonoBehaviour
 
     public void Update()
     {
-        transform.Rotate(Vector3.forward * speed * Time.deltaTime);
+        transform.parent.Rotate(Vector3.forward * speed * Time.deltaTime);
 
     }
 }

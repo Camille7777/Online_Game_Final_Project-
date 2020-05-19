@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 2814419647025984562}
   m_Layer: 0
   m_Name: Vornado_VFAN
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,8 +256,9 @@ Transform:
   m_GameObject: {fileID: 1249056311682516513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -17.1, z: 1.609}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
+  - {fileID: 8166236702526922362}
   - {fileID: 7094408627247340791}
   - {fileID: 7094408627382521759}
   - {fileID: 7094408627622253796}
@@ -726,6 +727,52 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &4054911897698422460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8166236702526922362}
+  - component: {fileID: 5578333344011734438}
+  m_Layer: 0
+  m_Name: Scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8166236702526922362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054911897698422460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2814419647025984562}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5578333344011734438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054911897698422460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088a4625bbb275a49ab6a0c9dd34270d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windDirection: {x: 0, y: 0, z: 0}
+  switch_on: 1
+  windStrength: 40
 --- !u!1 &4061246000207379369
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +1043,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7094408627247340791}
   - component: {fileID: 7094408627247340789}
-  - component: {fileID: 7094408627247340790}
   m_Layer: 0
   m_Name: WindArea
   m_TagString: Untagged
@@ -1017,7 +1063,7 @@ Transform:
   m_Children:
   - {fileID: 7094408629284035566}
   m_Father: {fileID: 2814419647025984562}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7094408627247340789
 BoxCollider:
@@ -1032,21 +1078,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 18.795906, z: 10}
   m_Center: {x: 0, y: 7.897953, z: 0}
---- !u!114 &7094408627247340790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7094408627247340784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088a4625bbb275a49ab6a0c9dd34270d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windDirection: {x: 0, y: 0, z: 0}
-  switch_on: 1
-  windStrength: 40
 --- !u!1 &7094408627382521752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,7 +1118,7 @@ Transform:
   - {fileID: 8500898805625404098}
   - {fileID: 7358911092194100863}
   m_Father: {fileID: 2814419647025984562}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -7.3980002, y: 0.51900005, z: -4.024}
 --- !u!1 &7094408627622253797
 GameObject:
@@ -1121,7 +1152,7 @@ Transform:
   - {fileID: 8869296783293790090}
   - {fileID: 7916857707894405865}
   m_Father: {fileID: 2814419647025984562}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7094408628926139376
 GameObject:

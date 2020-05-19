@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - sps
+  - Obj_Player
+  - Trap
   layers:
   - Default
   - TransparentFX
