@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform spawnLocation;
     public GameObject playerTransparentPrefab;
     public GameObject[] traps;
-    public float buildStateTimeLimit = 10f;
+    public float buildStateTimeLimit = 15f;
     #endregion
 
     #region Assets for Battle

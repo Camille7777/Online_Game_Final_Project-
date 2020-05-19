@@ -452,12 +452,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf83f0746d1bf6a48acd44e0521d12fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 4
   lookSensitivity: 3
   fpsCamera: {fileID: 3250467746646015597}
   instance: {fileID: 0}
-  jumpForce: 300
-  timeBeforeNextJump: 1.2
+  jumpForce: 250
+  timeBeforeNextJump: 0.5
 --- !u!114 &4604608546749779867
 MonoBehaviour:
   m_ObjectHideFlags: 0
