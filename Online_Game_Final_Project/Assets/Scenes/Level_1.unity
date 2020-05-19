@@ -27845,9 +27845,9 @@ MonoBehaviour:
     type: 3}
   playerselection:
   - {fileID: 1585349779547952, guid: c392056cd3dc7e945848a7a8f03785bf, type: 3}
-  - {fileID: 1585349779547952, guid: 39937b7bfe52a6b4ca005d602c65888f, type: 3}
-  - {fileID: 1585349779547952, guid: 6e0890f88075deb47a9a9ef276506e66, type: 3}
-  - {fileID: 1585349779547952, guid: 22997ca4a31ec3244b4aa369bfc10f64, type: 3}
+  - {fileID: 1969419073538870, guid: da8ccdf7eb4aa1a4bab94143596416b0, type: 3}
+  - {fileID: 1417258215064542, guid: 4f6e27c2f17726b48a5c720f6e68e8b4, type: 3}
+  - {fileID: 1755646104177140, guid: ac920d7b71a7d084ab99b44eeef3d754, type: 3}
   BattleState_TimerLimit: 20
 --- !u!4 &1176984805
 Transform:
