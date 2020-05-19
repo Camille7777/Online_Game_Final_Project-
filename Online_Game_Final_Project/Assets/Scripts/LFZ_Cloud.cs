@@ -30,6 +30,10 @@ public class LFZ_Cloud : MonoBehaviourPunCallbacks
     void FallDestroy()
     {
         rb.useGravity = true;
-        PhotonNetwork.Destroy(transform.gameObject);
+        if(photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(transform.gameObject);
+        }
+       
     }
 }
