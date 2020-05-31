@@ -296,7 +296,7 @@ MonoBehaviour:
   lookSensitivity: 3
   fpsCamera: {fileID: 1055676291959141058}
   instance: {fileID: 0}
-  jumpForce: 250
+  jumpForce: 500
   timeBeforeNextJump: 0.5
 --- !u!114 &2940874087424195588
 MonoBehaviour:
