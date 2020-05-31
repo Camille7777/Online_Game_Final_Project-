@@ -45,8 +45,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
       foreach (Player p in PhotonNetwork.PlayerList)
         {
-            Debug.Log(p.NickName+"   :"+p.CustomProperties["Score"]);
-            Debug.Log(p.NickName + "   :" + p.CustomProperties["Des_sequence"]);
+            Debug.Log(p.NickName+"Score :"+p.CustomProperties["Score"]);
+            Debug.Log(p.NickName + "Ranking   :" + p.CustomProperties["Des_sequence"]);
         }
     }
 }
