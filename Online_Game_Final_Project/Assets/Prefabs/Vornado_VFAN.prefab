@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 2814419647025984562}
   m_Layer: 0
   m_Name: Vornado_VFAN
-  m_TagString: Trap
+  m_TagString: BigFan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 7094408627247340789}
   m_Layer: 0
   m_Name: WindArea
-  m_TagString: Untagged
+  m_TagString: BigFan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

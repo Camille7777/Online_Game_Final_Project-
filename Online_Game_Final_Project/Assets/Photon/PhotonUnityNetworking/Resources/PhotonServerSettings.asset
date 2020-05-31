@@ -38,6 +38,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - TakeDamage
   - AddcustomChild
+  - AddScore
+  - SetreachDestination
+  - recordPlayerSequence
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

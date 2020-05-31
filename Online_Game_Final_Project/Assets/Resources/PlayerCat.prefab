@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 5977255761813541442}
   - component: {fileID: 6595685748203779921}
   - component: {fileID: 6783334943370950964}
+  - component: {fileID: -5667460969241416513}
   m_Layer: 0
   m_Name: PlayerCat
   m_TagString: Untagged
@@ -394,6 +395,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FPSCamera: {fileID: 7178987309865427382}
   playerNameText: {fileID: 550205132710668341}
+--- !u!114 &-5667460969241416513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585349779547952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ef8caae84f8de4a8e6816b3d392805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 1
+  currentscore: 0
+  reach_destination: 0
+  destination_sequence: 0
 --- !u!1 &1686542506629698
 GameObject:
   m_ObjectHideFlags: 0

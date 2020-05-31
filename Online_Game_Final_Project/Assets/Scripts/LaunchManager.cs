@@ -57,6 +57,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Photon Callbacks
+   
 
     public override void OnConnectedToMaster()
     {
@@ -89,6 +90,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 20;
 
         PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
+       
     }
 
     public override void OnJoinedRoom()

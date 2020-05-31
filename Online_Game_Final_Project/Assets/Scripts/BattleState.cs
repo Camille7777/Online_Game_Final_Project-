@@ -5,7 +5,7 @@ using System;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
-
+using ExitGames.Client.Photon;
 
 public class BattleState : MonoBehaviourPunCallbacks,Istate
 {
@@ -14,12 +14,14 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
     public float BattleState_Timer;
     public float BattleState_TimeLimit;
     public GameObject RealplayerPrefab;
+    private const byte RECORD_SEQUENCE_EVENT=0;
+
     
     public Action WinCallBack;
     public Action LostCallBack;
     private bool player_spawned = false;
 
-
+    public ExitGames.Client.Photon.Hashtable _customroomproperties = new ExitGames.Client.Photon.Hashtable();
 
     public void onStateEnter()
     {
@@ -28,7 +30,14 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
       //prepare this state assets
         PrepareBattleAssets(RandomPlayer());
 
-        Debug.Log(BattleStateDestination.position);
+       // Debug.Log(BattleStateDestination.position);
+       if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
+        {
+            _customroomproperties.Add("Global_destination_Var", 0);
+            Debug.Log("room properties created");
+            PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
+
+        }
 
     }
 
@@ -128,9 +137,30 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                 {
 
                     Debug.Log("reach destination");
+                    //record player reached destination
+                    if(Player.GetComponent<PlayerBehaviour>().reach_destination==false && Player.GetComponent<PhotonView>().IsMine)
+                    {  
+                       
+                        Player.GetComponent<PhotonView>().RPC("AddScore", RpcTarget.AllBuffered, ScoreManager.instance.destination_objective_point,Player.GetComponent<PhotonView>().Owner);
+
+
+
+                        int current_sequence=(int) PhotonNetwork.CurrentRoom.CustomProperties["Global_destination_Var"];
+                        current_sequence += 1;
+                        _customroomproperties["Global_destination_Var"] = current_sequence;
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
+                        Debug.Log(current_sequence);
+
+                       
+
+                        Player.GetComponent<PhotonView>().RPC("SetreachDestination", RpcTarget.AllBuffered, true ,(float) current_sequence ,Player.GetComponent<PhotonView>().Owner);
+                        
+                        
+                    }
+
 
                     //reset the timer to 0 so that system would not think is lose.
-                    BattleState_Timer = 0;
+                   // BattleState_Timer = 0;
 
                     //wait for others
 
@@ -138,7 +168,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                     // when everyone reached
                     
 
-                    WinCallBack();
+                   // WinCallBack();
                 }
 
                 
@@ -169,6 +199,26 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         return Randomindex;
     }
 
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
 
+    private  void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
 
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+       if(obj.Code==RECORD_SEQUENCE_EVENT)
+        {
+            object[] data = (object[])obj.CustomData;
+            float id = (float)data[0];
+            
+        }
+    }
 }
+// pass the id to the rank
+// object[] id_data = new object[] { id };
+// PhotonNetwork.RaiseEvent(RECORD_SEQUENCE_EVENT, id_data, RaiseEventOptions.Default, SendOptions.SendReliable);
