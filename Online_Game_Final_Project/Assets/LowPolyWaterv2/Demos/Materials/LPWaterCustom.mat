@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: LPWaterHighQualityDemo
+  m_Name: LPWaterCustom
   m_Shader: {fileID: 4800000, guid: 8165be4dd0b12774d80426d906df9c38, type: 3}
-  m_ShaderKeywords: LPW_FOAM WATER_REFLECTIVE _EDGEBLEND_ON _EMISSION _LIGHTABS_ON
-    _SHADING_FLAT _WAVES_HIGHQUALITY _ZWRITE_ON
+  m_ShaderKeywords: LPW_FOAM _CUSTOM_SHAPE _DISTORT_ON _EDGEBLEND_ON _EMISSION _LIGHTABS_ON
+    _SHADING_FLAT _WAVES_OFF _ZWRITE_ON
   m_LightmapFlags: 1
   m_CustomRenderQueue: 2501
   stringTagMap:
@@ -20,7 +20,7 @@ Material:
     - first:
         name: _BumpTex
       second:
-        m_Texture: {fileID: 2800000, guid: 5172883f19560c34db24c164f824d406, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -50,7 +50,7 @@ Material:
     m_Floats:
     - first:
         name: _Absorption
-      second: 7
+      second: 5
     - first:
         name: _BumpScale
       second: 35
@@ -68,13 +68,13 @@ Material:
       second: 2
     - first:
         name: _Diffuse
-      second: 0.7
+      second: 0.5
     - first:
         name: _Direction
       second: 180
     - first:
         name: _Distort
-      second: 0
+      second: 1
     - first:
         name: _Distortion
       second: 1
@@ -97,9 +97,6 @@ Material:
         name: _FresPower
       second: 1.5
     - first:
-        name: _Gloss
-      second: 0.6
-    - first:
         name: _HQFoam
       second: 0
     - first:
@@ -116,19 +113,19 @@ Material:
       second: 1
     - first:
         name: _NormalOffset
-      second: 1.5
+      second: 1
     - first:
         name: _Opacity
-      second: 0.2
+      second: 0
     - first:
         name: _PointLights
       second: 0
     - first:
         name: _RHeight
-      second: 0.25
+      second: 0.3
     - first:
         name: _RHeight_
-      second: 0.25
+      second: 0.3
     - first:
         name: _RSpeed
       second: 1
@@ -137,7 +134,7 @@ Material:
       second: 1
     - first:
         name: _Reflection
-      second: 1.2
+      second: 1.5
     - first:
         name: _Refraction
       second: 2
@@ -152,19 +149,16 @@ Material:
       second: 0
     - first:
         name: _Shadow
-      second: 0.7
+      second: 0.5
     - first:
         name: _ShoreDistance
-      second: 0.5
+      second: 0.2
     - first:
         name: _ShoreIntensity
       second: 1
     - first:
-        name: _Smoothness
-      second: 1
-    - first:
         name: _Specular
-      second: 44
+      second: 81
     - first:
         name: _Speed
       second: 0.5
@@ -188,32 +182,32 @@ Material:
       second: 1
     - first:
         name: _Waves
-      second: 2
+      second: 0
     - first:
         name: _ZWrite
       second: 1
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 1, b: 0.751724, a: 1}
+      second: {r: 0, g: 1, b: 0.99605894, a: 1}
     - first:
         name: _DeepColor
-      second: {r: 0, g: 0.6006591, b: 0.75735295, a: 1}
+      second: {r: 0, g: 0.4315415, b: 0.5441177, a: 1}
     - first:
         name: _Direction_
       second: {r: -1, g: -0.00000008742278, b: -0.6, a: -0.000000052453668}
     - first:
         name: _FresColor
-      second: {r: 0.525519, g: 0.72743106, b: 0.7941176, a: 1}
+      second: {r: 0.305, g: 0.371, b: 0.395, a: 1}
     - first:
         name: _ShoreColor
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _SpecColor
-      second: {r: 0.5955882, g: 0.57104737, b: 0.35472533, a: 1}
+      second: {r: 1, g: 0.9572973, b: 0.5808823, a: 1}
     - first:
         name: _Sun
-      second: {r: -0.5057393, g: 0.17364827, b: 0.8450291, a: 0}
+      second: {r: -0.757438, g: 0.3015378, b: -0.579105, a: 0}
     - first:
         name: _SunColor
       second: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}

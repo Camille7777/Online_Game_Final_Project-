@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: LPWaterHighQualityDemo
+  m_Name: LPWaterHighQuality
   m_Shader: {fileID: 4800000, guid: 8165be4dd0b12774d80426d906df9c38, type: 3}
   m_ShaderKeywords: LPW_FOAM WATER_REFLECTIVE _EDGEBLEND_ON _EMISSION _LIGHTABS_ON
     _SHADING_FLAT _WAVES_HIGHQUALITY _ZWRITE_ON
@@ -97,9 +97,6 @@ Material:
         name: _FresPower
       second: 1.5
     - first:
-        name: _Gloss
-      second: 0.6
-    - first:
         name: _HQFoam
       second: 0
     - first:
@@ -116,7 +113,7 @@ Material:
       second: 1
     - first:
         name: _NormalOffset
-      second: 1.5
+      second: 1
     - first:
         name: _Opacity
       second: 0.2
@@ -152,15 +149,12 @@ Material:
       second: 0
     - first:
         name: _Shadow
-      second: 0.7
+      second: 0.5
     - first:
         name: _ShoreDistance
       second: 0.5
     - first:
         name: _ShoreIntensity
-      second: 1
-    - first:
-        name: _Smoothness
       second: 1
     - first:
         name: _Specular
