@@ -94,7 +94,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.LoadLevel("Level_1");
+        PhotonNetwork.LoadLevel("level test");
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
