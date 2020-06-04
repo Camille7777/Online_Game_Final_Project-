@@ -78,11 +78,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (velocity != Vector3.zero)
         {
-            Vector3 direction = rb.position - transform.position; 
-            direction.x =90; 
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            //Vector3 direction = rb.position - transform.position; 
+           // direction.x =90; 
+            //Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             // targetRotation = new Vector3(0, 90, 0);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation , Time.deltaTime * speed));
+           // rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation , Time.deltaTime * speed));
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
             anim.SetInteger("Walk", 1);
         }

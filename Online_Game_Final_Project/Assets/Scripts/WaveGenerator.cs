@@ -21,4 +21,12 @@ public class WaveGenerator : MonoBehaviour {
 		pos.x = originalX + Mathf.Sin(angle) * amplitude;
 		transform.position = pos;
 	}
+
+	private bool isOnMovingPlatform;
+	private float offsetToKeepPlayerAbovePlatform = 2.2f;
+	private float min = 0.2f;
+	private float max = 1.2f;
+
+
+
 }
