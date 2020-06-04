@@ -27920,7 +27920,7 @@ MonoBehaviour:
   - {fileID: 3291769366055320034, guid: e8e5614434b93c344a4399ee0a7bed70, type: 3}
   - {fileID: 580883686353382687, guid: f8fbe158fc2278c41a2e46e65452c931, type: 3}
   - {fileID: 4341174075188769281, guid: bb9f5785ec4c0ca44875964523a471a0, type: 3}
-  buildStateTimeLimit: 15
+  buildStateTimeLimit: 1
   BattleStateStartingPoint: {fileID: 486638068}
   BattleStateDestination: {fileID: 673405321}
   RealplayerPrefab: {fileID: 167854, guid: f7b65dcf3709fb3488b00070a89ef861, type: 3}

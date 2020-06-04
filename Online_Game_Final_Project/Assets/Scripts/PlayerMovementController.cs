@@ -36,6 +36,9 @@ public class PlayerMovementController : MonoBehaviour
         {
             instance = this;
         }
+
+        //fpsCamera.transform.RotateAround(rb.transform.position, Vector3.up, 10);
+        fpsCamera.transform.Translate(new Vector3(-5f, 0f, 7f));
     }
 
     // Update is called once per frame
@@ -45,7 +48,7 @@ public class PlayerMovementController : MonoBehaviour
         float _xMovement = Input.GetAxis("Horizontal");
         float _zMovement = Input.GetAxis("Vertical");
 
-        Vector3 _movementHorizontal = transform.right * _xMovement;
+        Vector3 _movementHorizontal = (transform.right) * _xMovement;
         Vector3 _movementVertical = transform.forward * _zMovement;
 
         //Final movement velocity
@@ -75,6 +78,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (velocity != Vector3.zero)
         {
+            Vector3 direction = rb.position - transform.position; 
+            direction.x =90; 
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            // targetRotation = new Vector3(0, 90, 0);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation , Time.deltaTime * speed));
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
             anim.SetInteger("Walk", 1);
         }
@@ -87,7 +95,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
-            anim.SetTrigger("jump");
+            anim.SetTrigger("Jump");
         }
 
 
@@ -96,8 +104,9 @@ public class PlayerMovementController : MonoBehaviour
         if (fpsCamera != null)
         {
             CurrentCameraUpAndDownRotation -= CameraUpAndDownRotation;
-            CurrentCameraUpAndDownRotation = Mathf.Clamp(CurrentCameraUpAndDownRotation, -85, 85);
+            CurrentCameraUpAndDownRotation = Mathf.Clamp(CurrentCameraUpAndDownRotation, 0, 0);//-85
             fpsCamera.transform.localEulerAngles = new Vector3(CurrentCameraUpAndDownRotation, 0, 0);
+            //fpsCamera.transform.Translate(new Vector3(-4f, 0f, 5f));
         }
     }
 
