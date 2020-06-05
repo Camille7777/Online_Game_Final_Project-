@@ -5,28 +5,36 @@ public class WaveGenerator : MonoBehaviour {
 
 	public float amplitude = 2;
 	public float frequency = 2;
-
+	public float startMoving = 0;
+	public char xyz = 'x';
 	float angle = 0;
-	float originalX = 0;
+	float original = 0;
 
 	void Start(){
-		originalX = transform.position.x;
+		if(xyz=='x')
+			original = transform.position.x;
+		else if (xyz=='y')
+			original = transform.position.y;
+		else
+			original = transform.position.z;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		angle += Time.deltaTime * frequency;
-		Vector3 pos = transform.position;
-		pos.x = originalX + Mathf.Sin(angle) * amplitude;
-		transform.position = pos;
+		Invoke("move", startMoving);
 	}
 
-	private bool isOnMovingPlatform;
-	private float offsetToKeepPlayerAbovePlatform = 2.2f;
-	private float min = 0.2f;
-	private float max = 1.2f;
+	void move()
+    {
+		angle += Time.deltaTime * frequency;
+		Vector3 pos = transform.position;
 
-
-
+		if (xyz == 'x')
+			pos.x = original + Mathf.Sin(angle) * amplitude;
+		else if (xyz == 'y')
+			pos.y = original + Mathf.Sin(angle) * amplitude;
+		else
+			pos.z = original + Mathf.Sin(angle) * amplitude;
+		transform.position = pos;
+	}
 }
