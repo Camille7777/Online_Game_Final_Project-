@@ -147,7 +147,7 @@ namespace Photon.Pun.Demo.Cockpit
             MasterClientToolBar.SetActive(_player == newMasterClient);
         }
 
-        public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
+        public override void OnRoomUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
         {
             //Debug.Log("OnPlayerPropertiesUpdate " + target.ActorNumber + " " + target.ToStringFull() + " " + changedProps.ToStringFull());
 

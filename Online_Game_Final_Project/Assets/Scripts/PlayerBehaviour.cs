@@ -12,9 +12,10 @@ public class PlayerBehaviour : MonoBehaviourPunCallbacks
     public float currentscore;
     public bool reach_destination;
     public float destination_sequence;
+    
 
 
-    public ExitGames.Client.Photon.Hashtable _customscore = new ExitGames.Client.Photon.Hashtable();
+    public ExitGames.Client.Photon.Hashtable _customproperties= new ExitGames.Client.Photon.Hashtable();
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,11 @@ public class PlayerBehaviour : MonoBehaviourPunCallbacks
         currentscore = 0;   // or System assingned score;
         destination_sequence = 0; // 0 represent havent reach, large than one means the sequence
         reach_destination = false;
-        _customscore.Add("Score", currentscore);
-        _customscore.Add("Des_sequence", destination_sequence);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(_customscore);
+
+        // initialise key for each players
+        _customproperties.Add("Score", currentscore);
+        _customproperties.Add("Des_sequence", destination_sequence);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(_customproperties);
         Debug.Log(" first nitialise score success");
 
     }
@@ -54,9 +57,9 @@ public class PlayerBehaviour : MonoBehaviourPunCallbacks
     {
         currentscore = (float)Targetplayerscore.CustomProperties["Score"];
         currentscore += _score;
-        _customscore["Score"] = currentscore;
-        Targetplayerscore.SetCustomProperties(_customscore);
-        //Targetplayerscore.CustomProperties = _customscore;
+        _customproperties["Score"] = currentscore;
+        Targetplayerscore.SetCustomProperties(_customproperties);
+       
        // Debug.Log(currentscore);
 
 
@@ -66,8 +69,8 @@ public class PlayerBehaviour : MonoBehaviourPunCallbacks
     public void SetreachDestination(bool yes, float sequence_number, Player Targetplayerscore)
     {
         reach_destination = yes;
-        _customscore["Des_sequence"] = sequence_number;
-        Targetplayerscore.SetCustomProperties(_customscore);
+        _customproperties["Des_sequence"] = sequence_number;
+        Targetplayerscore.SetCustomProperties(_customproperties);
 
     }
 
@@ -82,76 +85,69 @@ public class PlayerBehaviour : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-       
 
+        Debug.Log("collided" + other.gameObject.tag);
         switch (other.gameObject.tag)
         {
             case "BigFan":
                 UpdateScore(other.gameObject, ScoreManager.instance.bigfanScore);
-                Debug.Log("collided");
+                //photonView.RPC("UpdateScore", RpcTarget.AllBuffered, other.gameObject, ScoreManager.instance.bigfanScore);//1
+               
                 break;
+                
 
             case "Gun":
                 UpdateScore(other.gameObject, ScoreManager.instance.gunScore);
-                Debug.Log("collided");
+                
                 break;
         }
+       
     }
 
+    
     void UpdateScore(GameObject trap, float trapType_score)
     {
-        if (!trap.gameObject.GetComponentInParent<PhotonView>().IsMine)
+        if (trap.gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
-            Debug.Log("score updated");
-
-
-
-
            
-            if(trap.gameObject.GetComponentInParent<PhotonView>().Owner.CustomProperties["Score"] != null)
+            Debug.Log("my trap");
+
+            
+
+        }
+        else if (trap.gameObject.GetComponentInParent<PhotonView>().Owner.ActorNumber!=photonView.Owner.ActorNumber)
+        {
+            Debug.Log("is not mine");
+            
+            
+            if (trap.gameObject.GetComponentInParent<PhotonView>().Owner.CustomProperties["Score"] != null)
             {
                 currentscore = (float)trap.gameObject.GetComponentInParent<PhotonView>().Owner.CustomProperties["Score"];
-               AddScore(trapType_score, trap.gameObject.GetComponentInParent<PhotonView>().Owner);
-              //  Debug.Log(" second set score success");
+                AddScore(trapType_score, trap.gameObject.GetComponentInParent<PhotonView>().Owner);
+                //  Debug.Log(" second set score success");
             }
             else
             {
                 Debug.LogError("Score key not initialise yet");
             }
-           
-
-
-           
-           // Debug.Log(trap.gameObject.GetComponent<PhotonView>().Owner.CustomProperties["Score"]);
-
-        }
-        else
-        {
-            Debug.Log("my trap");
-
-            //if (trap.gameObject.GetComponentInParent<PhotonView>().Owner.CustomProperties["Score"] != null)
-            //{
-            //    currentscore = (float)trap.gameObject.GetComponentInParent<PhotonView>().Owner.CustomProperties["Score"];
-            //    AddScore(trapType_score, trap.gameObject.GetComponentInParent<PhotonView>().Owner);
-            //    Debug.Log(" second set score success");
-            //}
-            //else
-            //{
-            //    Debug.LogError("Score key not initialise yet");
-            //}
-
-
-
 
 
         }
     }
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    public override void OnRoomUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-        Debug.Log("call back score done");
-        ScoreManager.instance.displayRanking();
+        base.OnRoomUpdate(targetPlayer, changedProps);
+        
+      
+        if(targetPlayer!=null )
+        {
+            Debug.Log(targetPlayer + "changed" + changedProps);
+            
+            ScoreManager.instance.displayRanking();
+
+        }
+       
     }
 }
 

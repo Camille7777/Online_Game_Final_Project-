@@ -24,6 +24,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         EnterGamePanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
         LobbyPanel.SetActive(false);
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     // Update is called once per frame
@@ -85,6 +86,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         string randomRoomName = "Room" + Random.Range(0, 10000);
 
         RoomOptions roomOptions = new RoomOptions();
+        roomOptions.BroadcastPropsChangeToAll = true;
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = true;
         roomOptions.MaxPlayers = 20;
