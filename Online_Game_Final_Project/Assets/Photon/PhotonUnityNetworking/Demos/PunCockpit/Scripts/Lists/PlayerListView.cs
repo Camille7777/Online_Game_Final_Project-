@@ -101,7 +101,7 @@ namespace Photon.Pun.Demo.Cockpit
             }
         }
 
-        public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
+        public override void OnRoomUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
         {
             if (playerCellList.ContainsKey(target.ActorNumber))
             {

@@ -11,7 +11,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public float bigfanScore=10;
     public float gunScore=20;
     public float current_sequence = 0;
-    
+    public GameObject UICanvasForLastResult;
+    public GameObject UICanvasForEveryRoundResult;
+
+
 
     public static ScoreManager instance;
 
@@ -43,10 +46,71 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public void displayRanking()
     {
-      foreach (Player p in PhotonNetwork.PlayerList)
+
+        //Debug.Log(p.NickName + "Score :" + p.CustomProperties["Score"]);
+        //Debug.Log(p.NickName + "Ranking   :" + p.CustomProperties["Des_sequence"]);
+        sortScore();
+       
+    }
+
+    public void sortScore()
+    {
+        Debug.Log("sorting score...");
+       Player[] pList = PhotonNetwork.PlayerList;
+        System.Array.Sort(pList, delegate (Player p1, Player p2) {
+            string p1score = p1.CustomProperties["Score"].ToString();
+            string p2score = p2.CustomProperties["Score"].ToString();
+            return p1score.CompareTo(p2score); });
+        //reverse the lost for descending order
+        System.Array.Reverse(pList);
+        // call the display resut
+        displayresult(pList);
+    }
+
+    public void displayresult(Player[] pList)
+    {
+        Debug.Log(" after sort");
+        foreach (Player p in pList)
         {
-            Debug.Log(p.NickName+"Score :"+p.CustomProperties["Score"]);
-            Debug.Log(p.NickName + "Ranking   :" + p.CustomProperties["Des_sequence"]);
+            // this is the current score for each player
+            Debug.Log(p.NickName + "Score :" + p.CustomProperties["Score"]);
+            // this is the current ranking for this round
+            Debug.Log(p.NickName + "Reach Destination Ranking   :" + p.CustomProperties["Des_sequence"]);
         }
+
+        /**************************** for UI *******************************************/
+        /*
+         * 
+         
+        //eg.
+        // this Plist is alrd sorted, every time the score changed, the highest score will be at pList[0]
+    
+        for (int i=0; i<pList.Length;i++)
+        {
+            //assign the NickName to the Display name UI text
+            
+            **********************************************
+            UI.displayname[i].text=pList[i].NickName
+            ***********************************************
+            
+
+          ** if you want to diaplay name for each player, just use PhotonNetwork.LocalPlayer.NickName
+       
+        }
+        */
+
+
+    }
+
+
+
+    public float OnDestinationReachedScore(int sequence)
+
+    {
+
+        //if x=1 get 100; x=2 get 50; x=3 get=33
+        float Score = 1 / sequence * 100;
+        Debug.Log("rankscoreadded");
+        return  Score; 
     }
 }

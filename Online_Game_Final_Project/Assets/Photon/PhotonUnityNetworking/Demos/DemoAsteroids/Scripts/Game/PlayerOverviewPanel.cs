@@ -53,7 +53,7 @@ namespace Photon.Pun.Demo.Asteroids
             playerListEntries.Remove(otherPlayer.ActorNumber);
         }
 
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+        public override void OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
         {
             GameObject entry;
             if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
