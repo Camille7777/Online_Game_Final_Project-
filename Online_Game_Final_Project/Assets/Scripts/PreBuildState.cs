@@ -20,56 +20,33 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
     
     public float buildStateTimeLimit ;
     private float timer;
-    private int currentround = 0;
-
-
-
-
-    public ExitGames.Client.Photon.Hashtable _customroomproperties = new ExitGames.Client.Photon.Hashtable();
+   
+    
+    
+ 
 
 
     public void onStateEnter()
     {
+        //loadIn all prefabs
+
+        //for (int i = 0; i < 4; i++)
+        // {
+        //     traps[i] = Resources.Load("prefab_" + (i + 1)) as GameObject;
+        //}
+        // playerTransparentPrefab = Resources.Load("Invi_player") as GameObject;
+
+        ////spwan four player prefabs to spawnlocation
+        // InstantiateAssets();
+        //SpawnPlayer();
+       
         
-        //setting up all the room properties
+        //setting up players
 
 
-        //if the room properties not set yet
-
-        if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
-        {
-            _customroomproperties.Add("Global_destination_Var", 0);
-            _customroomproperties.Add("Round", 1);
-
-            Debug.Log("room properties created");
-            PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
-
-        }
-        else
-        {
-            // all the player needs to know current round
-            currentround = (int)PhotonNetwork.CurrentRoom.CustomProperties["Round"];
-            currentround += 1;
-
-            if (PhotonNetwork.LocalPlayer.IsMasterClient)
-            {
-                //only master client need to write the new round
-
-                //reset the room properties to 0 because the round is renewed
-                _customroomproperties["Global_destination_Var"] = 0;
-                _customroomproperties["Round"] = currentround;
-                //update the round
-                PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
-                
-            }
-
-            Debug.Log("Round" + currentround);
-        }
+        ////assign random player to random traps(prefabs);
 
         timer = 0;
-
-     
-
 
 
 

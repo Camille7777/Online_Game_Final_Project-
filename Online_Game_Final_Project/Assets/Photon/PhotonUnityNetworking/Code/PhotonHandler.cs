@@ -220,7 +220,7 @@ namespace Photon.Pun
 
         public void OnJoinedRoom(){}
 
-        public void OnRoomUpdate(Player targetPlayer, Hashtable changedProps){}
+        public void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps){}
 
         public void OnMasterClientSwitched(Player newMasterClient){}
 

@@ -139,7 +139,7 @@ namespace Photon.Pun.UtilityScripts
             this.ClearTeams();
         }
 
-        void IInRoomCallbacks.OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
+        void IInRoomCallbacks.OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             object temp;
             if (changedProps.TryGetValue(TeamPlayerProp, out temp))

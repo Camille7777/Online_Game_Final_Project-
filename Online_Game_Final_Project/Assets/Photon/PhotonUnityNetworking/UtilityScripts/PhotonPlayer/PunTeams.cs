@@ -81,7 +81,7 @@ namespace Photon.Pun.UtilityScripts
 
         /// <summary>Refreshes the team lists. It could be a non-team related property change, too.</summary>
         /// <remarks>Called by PUN. See enum MonoBehaviourPunCallbacks for an explanation.</remarks>
-        public override void OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             this.UpdateTeams();
         }

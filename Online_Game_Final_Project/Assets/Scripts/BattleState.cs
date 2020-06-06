@@ -15,10 +15,8 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
     public float BattleState_TimeLimit;
     public GameObject RealplayerPrefab;
     private const byte RECORD_SEQUENCE_EVENT=0;
-    public float roundlimit;
-   
 
-
+    
     public Action WinCallBack;
     public Action LostCallBack;
     private bool player_spawned = false;
@@ -32,38 +30,14 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
       //prepare this state assets
         PrepareBattleAssets(RandomPlayer());
 
-        // means first rounf and not set the room properties yet
-        /*
+       // Debug.Log(BattleStateDestination.position);
        if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
         {
             _customroomproperties.Add("Global_destination_Var", 0);
-            _customroomproperties.Add("Round", 1);
-           
             Debug.Log("room properties created");
             PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
 
         }
-       else
-        {
-            // all the player needs to know current round
-            currentround = (int)PhotonNetwork.CurrentRoom.CustomProperties["Round"];
-            currentround += 1;
-
-            if (PhotonNetwork.LocalPlayer.IsMasterClient)
-            {
-                //only master client need to ammend
-
-                //reset the room properties to 0 because the round is renewed
-                _customroomproperties["Global_destination_Var"] = 0;
-                _customroomproperties["Round"] = currentround;
-            //update the round
-            PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
-            Debug.Log("Round"+currentround);
-            }
-           
-
-        }
-       */
 
     }
 
@@ -98,8 +72,6 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                // Player.GetComponent<PlayerMovementController>().speed=8;
                 Player.GetComponent<PlayerMovementController>().enabled = true;
 
-                //reset the reach destination
-                Player.GetComponent<PlayerBehaviour>().reach_destination = false;
                 //enable the camera
                 Player.transform.GetChild(0).gameObject.SetActive(true);
             }
@@ -156,7 +128,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         else
         {
             //else 
-            
+
 
             foreach (GameObject Player in GameManager.instance.Playerslist)
             {
@@ -169,44 +141,21 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                     if(Player.GetComponent<PlayerBehaviour>().reach_destination==false && Player.GetComponent<PhotonView>().IsMine)
                     {  
                        
+                        Player.GetComponent<PhotonView>().RPC("AddScore", RpcTarget.AllBuffered, ScoreManager.instance.destination_objective_point,Player.GetComponent<PhotonView>().Owner);
 
 
-                        //determine the player sequence
+
                         int current_sequence=(int) PhotonNetwork.CurrentRoom.CustomProperties["Global_destination_Var"];
                         current_sequence += 1;
                         _customroomproperties["Global_destination_Var"] = current_sequence;
                         PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
-                        Debug.Log("current_sequence"+current_sequence);
+                        Debug.Log(current_sequence);
 
+                       
 
-                        //add the reach destination score
-                        float destination_obj_score = ScoreManager.instance.destination_objective_point;
-                        //add the sequence score
-                        float destination_seq_score = ScoreManager.instance.OnDestinationReachedScore(current_sequence);
-                        Player.GetComponent<PhotonView>().RPC("AddScore", 
-                            RpcTarget.AllBuffered,
-                            destination_obj_score+ destination_seq_score,
-                            Player.GetComponent<PhotonView>().Owner);
-
-
-                        // set the player  reach destination and  global sequence to player's own sequence variable
-                        Player.GetComponent<PhotonView>().RPC("SetreachDestination", 
-                            RpcTarget.AllBuffered,
-                            true ,
-                            (float) current_sequence ,
-                            Player.GetComponent<PhotonView>().Owner);
-
+                        Player.GetComponent<PhotonView>().RPC("SetreachDestination", RpcTarget.AllBuffered, true ,(float) current_sequence ,Player.GetComponent<PhotonView>().Owner);
                         
-                        //if currentround== round limit && all player reached
-                        //if(currentround>=roundlimit&&current_sequence== )
-                        //{
-                        //    //tell other ppl, all the player reach the destination // and go to result state 
-                        //    _customroomproperties["Finished"] = true;
-                        //    //update the round
-                        //    PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
-
-                        //}
-
+                        
                     }
 
 
@@ -218,30 +167,12 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
                     // when everyone reached
                     
-                  
-                   
+
+                   // WinCallBack();
                 }
 
-                if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
-                {
-                    if (
-                        ((int)PhotonNetwork.CurrentRoom.CustomProperties["Global_destination_Var"] == PhotonNetwork.PlayerList.Length)
-                        &&
-                        ((int)PhotonNetwork.CurrentRoom.CustomProperties["Round"] >= roundlimit)
-                    
-                       )
-
-                    {
-                        WinCallBack();
-                    }
-                }
-
-               
-
-
+                
             }
-
-            
 
         }
 
@@ -252,6 +183,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
     public void onFixedUpdate()
     {
+
     }
 
     public void onStateExit()
@@ -263,14 +195,8 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
     public int RandomPlayer()
     {
         int Randomindex = UnityEngine.Random.Range(0, GameManager.instance.traps.Length);
-       // Debug.Log(Randomindex);
+        Debug.Log(Randomindex);
         return Randomindex;
-    }
-
-    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-    {
-        base.OnRoomPropertiesUpdate(propertiesThatChanged);
-        Debug.Log("the room prop >>" + propertiesThatChanged + ">>has changed");
     }
 
     private void OnEnable()

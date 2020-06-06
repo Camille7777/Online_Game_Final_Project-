@@ -313,7 +313,7 @@ namespace Photon.Realtime
 			Debug.Log(this.GetFormattedTimestamp() + " SupportLogger OnRoomPropertiesUpdate(propertiesThatChanged).");
         }
 
-        public void OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
+        public void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
 			Debug.Log(this.GetFormattedTimestamp() + " SupportLogger OnPlayerPropertiesUpdate(targetPlayer,changedProps).");
         }

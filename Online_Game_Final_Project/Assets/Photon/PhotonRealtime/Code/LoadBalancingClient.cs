@@ -1813,7 +1813,7 @@ namespace Photon.Realtime
                 if (target != null)
                 {
                     target.InternalCacheProperties(actorProperties);
-                    this.InRoomCallbackTargets.OnRoomUpdate(target, actorProperties);
+                    this.InRoomCallbackTargets.OnPlayerPropertiesUpdate(target, actorProperties);
                 }
             }
             return res;
@@ -1994,7 +1994,7 @@ namespace Photon.Realtime
                     {
                         Hashtable props = this.ReadoutPropertiesForActorNr(actorProperties, targetActorNr);
                         target.InternalCacheProperties(props);
-                        this.InRoomCallbackTargets.OnRoomUpdate(target, props);
+                        this.InRoomCallbackTargets.OnPlayerPropertiesUpdate(target, props);
                     }
                 }
                 else
@@ -3550,7 +3550,7 @@ namespace Photon.Realtime
         /// </remarks>
         /// <param name="targetPlayer">Contains Player that changed.</param>
         /// <param name="changedProps">Contains the properties that changed.</param>
-        void OnRoomUpdate(Player targetPlayer, Hashtable changedProps);
+        void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps);
 
         /// <summary>
         /// Called after switching to a new MasterClient when the current one leaves.
@@ -3859,13 +3859,13 @@ namespace Photon.Realtime
             }
         }
 
-        public void OnRoomUpdate(Player targetPlayer, Hashtable changedProp)
+        public void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProp)
         {
             this.client.UpdateCallbackTargets();
 
             foreach (IInRoomCallbacks target in this)
             {
-                target.OnRoomUpdate(targetPlayer, changedProp);
+                target.OnPlayerPropertiesUpdate(targetPlayer, changedProp);
             }
         }
 

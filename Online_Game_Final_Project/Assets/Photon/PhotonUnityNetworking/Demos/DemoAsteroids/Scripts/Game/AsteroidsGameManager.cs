@@ -138,7 +138,7 @@ namespace Photon.Pun.Demo.Asteroids
             CheckEndOfGame();
         }
 
-        public override void OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             if (changedProps.ContainsKey(AsteroidsGame.PLAYER_LIVES))
             {

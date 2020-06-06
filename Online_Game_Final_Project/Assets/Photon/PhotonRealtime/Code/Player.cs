@@ -401,7 +401,7 @@ namespace Photon.Realtime
                     this.CustomProperties.Merge(customProps);
                     this.CustomProperties.StripKeysWithNullValues();
                     // invoking callbacks
-                    this.RoomReference.LoadBalancingClient.InRoomCallbackTargets.OnRoomUpdate(this, customProps);
+                    this.RoomReference.LoadBalancingClient.InRoomCallbackTargets.OnPlayerPropertiesUpdate(this, customProps);
                     return true;
                 }
                 else

@@ -12,11 +12,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     private StateMachine stateMachine;
     private PreBuildState build = new PreBuildState();
     private BattleState battle = new BattleState();
-    private ResultState result = new ResultState();
     public List<GameObject> objectPlayers = new List<GameObject>();
     public List<GameObject> Playerslist = new List<GameObject>();
     public int assignned_child_trap=0;
-    
 
 
     #region Assets for PrebuildScene
@@ -32,11 +30,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject RealplayerPrefab;
     public GameObject[] playerselection;
     public float BattleState_TimerLimit=120f;
-    public float roundlimit=2;
-    #endregion
-
-    #region Assets for Resultstate
-    public float ResultState_TimerLimit = 120f;
     #endregion
 
     public static GameManager instance;
@@ -102,12 +95,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void BattleWinCallBack()
     {
         Debug.Log("Battle state is end");
-        
         Debug.Log("Battle state is win");
-
-       ScoreManager.instance.UICanvasForLastResult.SetActive(true);
-
-        
 
         // stateMachine.changeState(Build());
         //go to win state
@@ -123,15 +111,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //go to lost state first
 
         //spwan obj again
-        Debug.Log("Go to result state");
-        stateMachine.changeState(Result());
-
-    }
-
-    public void resultStateCallBack()
-    {
-        Debug.Log("result state is end");
-
+       
         if (playerTransparentPrefab != null)
         {
 
@@ -139,7 +119,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         //then only go build again
         stateMachine.changeState(Build());
-       
+
     }
 
 
@@ -169,20 +149,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         battle.BattleState_TimeLimit= BattleState_TimerLimit;
         battle.WinCallBack = BattleWinCallBack;
         battle.LostCallBack = BattleLostCallBack;
-        battle.roundlimit = roundlimit;
 
         return battle;
-    }
-
-    private ResultState Result()
-    {
-       
-        
-       
-        result.CallBack = resultStateCallBack;
-        result.resultStateTimeLimit = buildStateTimeLimit;
-
-        return result;
     }
 
     public void RandomTrap()
@@ -201,9 +169,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
-    public override void OnPlayerLeftRoom(Player p)
+    public override void OnLeftRoom()
     {
-        Debug.Log(p.NickName + "has left");
         SceneManager.LoadScene("GameLauncherScene");
     }
 

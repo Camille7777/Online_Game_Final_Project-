@@ -106,7 +106,7 @@ namespace Photon.Pun.UtilityScripts
             this.RefreshData();
         }
 
-        public override void OnRoomUpdate(Player targetPlayer, Hashtable changedProps)
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             if (changedProps != null && changedProps.ContainsKey(PlayerNumbering.RoomPlayerIndexedProp))
             {
