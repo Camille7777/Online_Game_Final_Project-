@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
@@ -13,8 +14,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public float current_sequence = 0;
     public GameObject UICanvasForLastResult;
     public GameObject UICanvasForEveryRoundResult;
+    object hashTableValue;
+    public Player[] pList;
 
 
+   // public ExitGames.Client.Photon.Hashtable _customroomproperties = new ExitGames.Client.Photon.Hashtable();
 
     public static ScoreManager instance;
 
@@ -98,6 +102,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
        
         }
         */
+
+       // pList[].NickName;
+        string score=(string)pList[0].CustomProperties["Score"];
+        string round = (string)PhotonNetwork.CurrentRoom.CustomProperties["Round"];
 
 
     }

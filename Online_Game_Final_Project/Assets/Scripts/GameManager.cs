@@ -105,7 +105,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         
         Debug.Log("Battle state is win");
 
-       ScoreManager.instance.UICanvasForLastResult.SetActive(true);
+        /* UI operation
+       
+        */
+        
+        ScoreManager.instance.UICanvasForLastResult.SetActive(true);
 
         
 

@@ -16,6 +16,13 @@ public class ResultState : MonoBehaviourPunCallbacks, Istate
     public void onStateEnter()
     {
         timer = 0;
+        /* UI operation
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+           string Score=(string) p.CustomProperties["Score"];
+        }
+        */
+
         ScoreManager.instance.UICanvasForEveryRoundResult.SetActive(true);
     }
 
