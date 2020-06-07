@@ -1126,6 +1126,7 @@ GameObject:
   - component: {fileID: 7025878142129674546}
   - component: {fileID: -639841099191701658}
   - component: {fileID: 2669669894323743454}
+  - component: {fileID: 469181397755128226}
   m_Layer: 0
   m_Name: Cat_B
   m_TagString: Untagged
@@ -1271,6 +1272,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1765642, y: 2.6440086, z: 1}
   m_Center: {x: 0, y: 1.3145571, z: 0}
+--- !u!143 &469181397755128226
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &169590
 GameObject:
   m_ObjectHideFlags: 0

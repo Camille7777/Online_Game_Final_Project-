@@ -38,6 +38,8 @@ public class PlayerMovementController : MonoBehaviour
     static int s_JumpingHash = Animator.StringToHash("PolyAnim|Run_Jump");
 
     static int s_JumpingSpeedHash = Animator.StringToHash("PolyAnim|Run_Forward");
+    static int s_left = Animator.StringToHash("PolyAnim|Run_Left");
+    static int s_right = Animator.StringToHash("PolyAnim|Run_Right");
     static int s_SlidingHash = Animator.StringToHash("PolyAnim|Run_Backward");
     //static int s_MovingHash = Animator.StringToHash("Moving");
 
@@ -103,7 +105,8 @@ public class PlayerMovementController : MonoBehaviour
     //runs per physics iteration
     private void FixedUpdate()
     {       //Calculate movement velocity as a 3D vector
-       
+
+        Vector3 verticalTargetPosition = rb.position;
         if (velocity != Vector3.zero)
         {
             //Vector3 direction = rb.position - transform.position; 
@@ -123,28 +126,46 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {
+
+            verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
             anim.SetTrigger("Jump");
             Jump();
+            m_Jumping = true;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             anim.SetTrigger("RunLeft");
+
+            anim.SetInteger("Walk", 0);
+            animator.SetBool(s_left, true);
+
+            animator.SetBool(s_left, false);
             //Slide();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             anim.SetTrigger("RunRight");
+
+            anim.SetInteger("Walk", 0);
+            animator.SetBool(s_right, true);
+
+            animator.SetBool(s_right, false);
             ///Slide();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+
+            anim.SetInteger("Walk", 0);
+            verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
             anim.SetTrigger("Jump"); 
             Jump();
+
+            m_Jumping = true;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -152,9 +173,9 @@ public class PlayerMovementController : MonoBehaviour
             if (!m_Sliding)
                 Slide();
         }
-        Vector3 verticalTargetPosition = rb.position;
         if (m_Sliding)
         {
+            StopSliding();
             // Slide time isn't constant but the slide length is (even if slightly modified by speed, to slide slightly further when faster).
             // This is for gameplay reason, we don't want the character to drasticly slide farther when at max speed.
             float correctSlideLength = slideLength * (1.0f + speed);
@@ -168,6 +189,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (m_Jumping)
         {
+            m_Jumping = false;
             if (m_Moving)
             {
                 // Same as with the sliding, we want a fixed jump LENGTH not fixed jump TIME. Also, just as with sliding,
