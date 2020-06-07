@@ -9,7 +9,7 @@ public class WaveGenerator : MonoBehaviour {
 	public char xyz = 'x';
 	float angle = 0;
 	float original = 0;
-
+	public Vector3 m_velocity;
 	void Start(){
 		if(xyz=='x')
 			original = transform.position.x;
@@ -35,6 +35,9 @@ public class WaveGenerator : MonoBehaviour {
 			pos.y = original + Mathf.Sin(angle) * amplitude;
 		else
 			pos.z = original + Mathf.Sin(angle) * amplitude;
+
+		m_velocity = (transform.position - pos) / Time.fixedDeltaTime;
 		transform.position = pos;
+
 	}
 }
