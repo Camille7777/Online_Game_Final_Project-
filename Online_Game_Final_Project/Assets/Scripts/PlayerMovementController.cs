@@ -26,19 +26,46 @@ public class PlayerMovementController : MonoBehaviour
     private float canJump = 0f;
     Animator anim;
 
+    protected float m_JumpStart;
+    protected bool m_Jumping;
+
+    protected bool m_Moving;
+    protected bool m_Sliding;
+    protected float m_SlideStart;
+
+   // public CharacterCollider characterCollider;
+    public Animator animator;
+    static int s_JumpingHash = Animator.StringToHash("PolyAnim|Run_Jump");
+
+    static int s_JumpingSpeedHash = Animator.StringToHash("PolyAnim|Run_Forward");
+    static int s_SlidingHash = Animator.StringToHash("PolyAnim|Run_Backward");
+    //static int s_MovingHash = Animator.StringToHash("Moving");
+
+    public float jumpHeight = 1.2f;
+
+    public float jumpLength = 2.0f;
+
+    protected const float k_TrackSpeedToJumpAnimSpeedRatio = 0.6f;
+    public float slideLength = 2.0f;
+    //protected const float k_GroundingSpeed = 80f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        if (instance==null)
+        if (instance == null)
         {
             instance = this;
         }
 
         //fpsCamera.transform.RotateAround(rb.transform.position, Vector3.up, 10);
-        fpsCamera.transform.Translate(new Vector3(-5f, 0f, 7f));
+        fpsCamera.transform.Translate(new Vector3(-5f, 0f, 7f));//-5f, 0f, 7f
+
+        m_Sliding = false;
+        m_SlideStart = 0.0f;
+
+        
     }
 
     // Update is called once per frame
@@ -75,20 +102,23 @@ public class PlayerMovementController : MonoBehaviour
 
     //runs per physics iteration
     private void FixedUpdate()
-    {
+    {       //Calculate movement velocity as a 3D vector
+       
         if (velocity != Vector3.zero)
         {
             //Vector3 direction = rb.position - transform.position; 
-           // direction.x =90; 
+            // direction.x =90; 
             //Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             // targetRotation = new Vector3(0, 90, 0);
-           // rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation , Time.deltaTime * speed));
+            // rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation , Time.deltaTime * speed));
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
             anim.SetInteger("Walk", 1);
+            m_Moving = true;
         }
         else
         {
             anim.SetInteger("Walk", 0);
+            m_Moving = false;
         }
 
         if (Input.GetButtonDown("Jump") && Time.time > canJump)
@@ -96,8 +126,75 @@ public class PlayerMovementController : MonoBehaviour
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
             anim.SetTrigger("Jump");
+            Jump();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            anim.SetTrigger("RunLeft");
+            //Slide();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            anim.SetTrigger("RunRight");
+            ///Slide();
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            rb.AddForce(0, jumpForce, 0);
+            canJump = Time.time + timeBeforeNextJump;
+            anim.SetTrigger("Jump"); 
+            Jump();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            anim.SetTrigger("RunBackward");
+            if (!m_Sliding)
+                Slide();
+        }
+        Vector3 verticalTargetPosition = rb.position;
+        if (m_Sliding)
+        {
+            // Slide time isn't constant but the slide length is (even if slightly modified by speed, to slide slightly further when faster).
+            // This is for gameplay reason, we don't want the character to drasticly slide farther when at max speed.
+            float correctSlideLength = slideLength * (1.0f + speed);
+            float ratio = (1.0f - m_SlideStart) / correctSlideLength;
+            if (ratio >= 1.0f)
+            {
+                // We slid to (or past) the required length, go back to running
+                StopSliding();
+            }
+        }
+
+        if (m_Jumping)
+        {
+            if (m_Moving)
+            {
+                // Same as with the sliding, we want a fixed jump LENGTH not fixed jump TIME. Also, just as with sliding,
+                // we slightly modify length with speed to make it more playable.
+                float correctJumpLength = jumpLength * (1.0f + speed);
+                float ratio = (1.0f - m_JumpStart) / correctJumpLength;
+                if (ratio >= 1.0f)
+                {
+                    m_Jumping = false;
+                    animator.SetBool(s_JumpingHash, false);
+                }
+                else
+                {
+                    verticalTargetPosition.y = Mathf.Sin(ratio * Mathf.PI) * jumpHeight;
+                }
+            }
+            else
+            {
+                //verticalTargetPosition.y = Mathf.MoveTowards(verticalTargetPosition.y, 0, k_GroundingSpeed * Time.deltaTime);
+                if (Mathf.Approximately(verticalTargetPosition.y, 0f))
+                {
+                    animator.SetBool(s_JumpingHash, false);
+                    m_Jumping = false;
+                }
+            }
+
+        }
 
         rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
 
@@ -108,8 +205,9 @@ public class PlayerMovementController : MonoBehaviour
             fpsCamera.transform.localEulerAngles = new Vector3(CurrentCameraUpAndDownRotation, 0, 0);
             //fpsCamera.transform.Translate(new Vector3(-4f, 0f, 5f));
         }
-    }
 
+
+    }
     void Move(Vector3 movementVelocity)
     {
         velocity = movementVelocity;
@@ -123,5 +221,46 @@ public class PlayerMovementController : MonoBehaviour
     void RotateCamera(float cameraUpDownRotation)
     {
         CameraUpAndDownRotation = cameraUpDownRotation;
+    }
+    public void StopSliding()
+    {
+        if (m_Sliding)
+        {
+            animator.SetBool(s_SlidingHash, false);
+            m_Sliding = false;
+
+           // characterCollider.Slide(false);
+        }
+    }
+    public void Slide()
+    {
+        if (!m_Sliding)
+        {
+            float correctSlideLength = slideLength * (1.0f + speed);
+            m_SlideStart = 1;
+            float animSpeed = k_TrackSpeedToJumpAnimSpeedRatio * (speed / correctSlideLength);
+
+            animator.SetFloat(s_JumpingSpeedHash, animSpeed);
+            animator.SetBool(s_SlidingHash, true);
+            m_Sliding = true;
+
+           // characterCollider.Slide(true);
+        }
+    }
+    public void Jump()
+    {
+        if (!m_Jumping)
+        {
+            if (m_Sliding)
+                StopSliding();
+
+            float correctJumpLength = jumpLength * (1.0f + speed);
+            m_JumpStart = 1;
+            float animSpeed = k_TrackSpeedToJumpAnimSpeedRatio * (speed / correctJumpLength);
+
+            animator.SetFloat(s_JumpingSpeedHash, animSpeed);
+            animator.SetBool(s_JumpingHash, true);
+            m_Jumping = true;
+        }
     }
 }
