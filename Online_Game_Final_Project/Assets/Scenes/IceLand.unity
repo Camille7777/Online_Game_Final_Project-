@@ -883,11 +883,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 37
       objectReference: {fileID: 0}
-    - target: {fileID: 1787475905219534, guid: fdddf307fbe6c4138a9019d179853a66, type: 3}
+    - target: {fileID: 1022254280978018, guid: fdddf307fbe6c4138a9019d179853a66, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1022254280978018, guid: fdddf307fbe6c4138a9019d179853a66, type: 3}
+    - target: {fileID: 1787475905219534, guid: fdddf307fbe6c4138a9019d179853a66, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -1426,6 +1426,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.6
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &35237269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8355,6 +8356,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.6
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &101948211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9407,6 +9409,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0
   xyz: 122
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &128664432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10396,6 +10399,7 @@ MonoBehaviour:
   frequency: 10
   startMoving: 0
   xyz: 120
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &158116439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10785,6 +10789,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &164361287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30297,6 +30302,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.4
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &314694364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36081,6 +36087,7 @@ MonoBehaviour:
   frequency: 9
   startMoving: 0
   xyz: 122
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &346887206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38741,6 +38748,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.82
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &396882550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39290,6 +39298,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 5
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &410976978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39379,6 +39388,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &411962303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41330,6 +41340,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.8
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &454078500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42026,6 +42037,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &467750792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43935,11 +43947,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 79
       objectReference: {fileID: 0}
-    - target: {fileID: 1343162226900264, guid: 6141895311d2a4047a49eb324d152b1b, type: 3}
+    - target: {fileID: 1238498460174118, guid: 6141895311d2a4047a49eb324d152b1b, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1238498460174118, guid: 6141895311d2a4047a49eb324d152b1b, type: 3}
+    - target: {fileID: 1343162226900264, guid: 6141895311d2a4047a49eb324d152b1b, type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
@@ -47406,6 +47418,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.8
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &623191597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48178,6 +48191,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.4
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!64 &640353851
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -52674,6 +52688,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.4
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &788274310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69486,6 +69501,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 5
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1132017473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70167,6 +70183,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.6
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1145991738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73009,6 +73026,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1218287307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78790,6 +78808,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1358128616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78879,6 +78898,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.82
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361160050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80059,6 +80079,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1398608474
 GameObject:
   m_ObjectHideFlags: 0
@@ -87330,6 +87351,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1458608400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97626,6 +97648,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 1.4
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1583323990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98747,6 +98770,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 0.6
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1607149299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109005,6 +109029,7 @@ MonoBehaviour:
   frequency: 5
   startMoving: 0
   xyz: 120
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1863254175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -109477,6 +109502,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 2
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1876691476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112223,6 +112249,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 8
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1938508600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113901,6 +113928,7 @@ MonoBehaviour:
   frequency: 1
   startMoving: 10
   xyz: 121
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1997128226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125758,6 +125786,10 @@ MonoBehaviour:
   instance: {fileID: 0}
   jumpForce: 500
   timeBeforeNextJump: 0.5
+  animator: {fileID: 9533212, guid: f7b65dcf3709fb3488b00070a89ef861, type: 3}
+  jumpHeight: 1.2
+  jumpLength: 2
+  slideLength: 2
 --- !u!65 &2669669893555087047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -125878,6 +125910,7 @@ MonoBehaviour:
   frequency: 5
   startMoving: 0
   xyz: 120
+  m_velocity: {x: 0, y: 0, z: 0}
 --- !u!33 &7865478705322415206
 MeshFilter:
   m_ObjectHideFlags: 0
