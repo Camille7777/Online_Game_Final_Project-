@@ -32,8 +32,8 @@ public class PlayerMovementController : MonoBehaviour
     protected bool m_Moving;
     protected bool m_Sliding;
     protected float m_SlideStart;
-
-   // public CharacterCollider characterCollider;
+    protected bool backward;
+    // public CharacterCollider characterCollider;
     public Animator animator;
     static int s_JumpingHash = Animator.StringToHash("PolyAnim|Run_Jump");
 
@@ -139,7 +139,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             anim.SetTrigger("RunLeft");
 
-            anim.SetInteger("Walk", 0);
             animator.SetBool(s_left, true);
 
             animator.SetBool(s_left, false);
@@ -149,7 +148,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             anim.SetTrigger("RunRight");
 
-            anim.SetInteger("Walk", 0);
             animator.SetBool(s_right, true);
 
             animator.SetBool(s_right, false);
@@ -158,21 +156,27 @@ public class PlayerMovementController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
 
-            anim.SetInteger("Walk", 0);
             verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
-            anim.SetTrigger("Jump"); 
+            anim.SetTrigger("fall"); 
             Jump();
 
             m_Jumping = true;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            anim.SetTrigger("RunBackward");
-            if (!m_Sliding)
-                Slide();
+            //anim.SetTrigger("RunBackward");
+            anim.SetBool("RunBackward", true);
+            backward = true;
+            //if (!m_Sliding)
+              //  Slide();
         }
+        if(backward)
+        {
+            anim.SetBool("RunBackward", false);
+        }
+
         if (m_Sliding)
         {
             StopSliding();
