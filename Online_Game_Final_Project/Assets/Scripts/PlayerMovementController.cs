@@ -33,6 +33,9 @@ public class PlayerMovementController : MonoBehaviour
     protected bool m_Sliding;
     protected float m_SlideStart;
     protected bool backward;
+    protected bool left;
+    protected bool right;
+    protected bool origin;
     // public CharacterCollider characterCollider;
     public Animator animator;
     static int s_JumpingHash = Animator.StringToHash("PolyAnim|Run_Jump");
@@ -41,6 +44,7 @@ public class PlayerMovementController : MonoBehaviour
     static int s_left = Animator.StringToHash("PolyAnim|Run_Left");
     static int s_right = Animator.StringToHash("PolyAnim|Run_Right");
     static int s_SlidingHash = Animator.StringToHash("PolyAnim|Run_Backward");
+    static int s_jump_origin = Animator.StringToHash("jump_origin");
     //static int s_MovingHash = Animator.StringToHash("Moving");
 
     public float jumpHeight = 1.2f;
@@ -49,6 +53,11 @@ public class PlayerMovementController : MonoBehaviour
 
     protected const float k_TrackSpeedToJumpAnimSpeedRatio = 0.6f;
     public float slideLength = 2.0f;
+
+
+    private float m_Timer;
+    private float m_Timer2;
+    private int m_Second;
     //protected const float k_GroundingSpeed = 80f;
     // Start is called before the first frame update
     void Start()
@@ -137,45 +146,52 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            anim.SetTrigger("RunLeft");
+            //anim.SetTrigger("RunLeft");
 
             animator.SetBool(s_left, true);
 
-            animator.SetBool(s_left, false);
+            //animator.SetBool(s_left, false);
+
+
+            anim.SetBool("RunLeft", true);
+            left = true;
             //Slide();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            anim.SetTrigger("RunRight");
-
+             //anim.SetTrigger("RunRight");
+           // Slide();
             animator.SetBool(s_right, true);
-
-            animator.SetBool(s_right, false);
-            ///Slide();
+            anim.SetBool("RunRight", true);
+            right = true;
+            //animator.SetBool(s_right, false);
+            //Slide();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
 
-            verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
+            /*verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
             anim.SetTrigger("fall"); 
             Jump();
 
-            m_Jumping = true;
+            m_Jumping = true;*/
+            anim.SetTrigger("jump_origin");
+            animator.SetBool(s_jump_origin, true);
+            origin = true;
+
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //anim.SetTrigger("RunBackward");
+            anim.SetTrigger("RunBackward");
+            animator.SetBool(s_SlidingHash, true);
             anim.SetBool("RunBackward", true);
             backward = true;
             //if (!m_Sliding)
               //  Slide();
         }
-        if(backward)
-        {
-            anim.SetBool("RunBackward", false);
-        }
+       Invoke("stop", 2.0f);
 
         if (m_Sliding)
         {
@@ -287,6 +303,50 @@ public class PlayerMovementController : MonoBehaviour
             animator.SetFloat(s_JumpingSpeedHash, animSpeed);
             animator.SetBool(s_JumpingHash, true);
             m_Jumping = true;
+        }
+    }
+
+    void stop()
+    {
+        //m_Timer2 = m_Timer;
+        //m_Timer += Time.deltaTime;
+        //m_Second = (int)m_Timer;
+
+        if (backward)
+        {
+            //if (m_Timer - m_Timer2 >= 1.0f)
+            {
+                backward = false;
+                anim.SetBool("RunBackward", false);
+                animator.SetBool(s_SlidingHash, false);
+            }
+
+        }
+        if (right)
+        {
+            //if (m_Timer - m_Timer2 >= 1.0f)
+            {
+                right = false;
+                anim.SetBool("RunRight", false);
+                animator.SetBool(s_right, false);
+            }
+        }
+        if (left)
+        {
+            //if (m_Timer - m_Timer2 >= 1.0f)
+            {
+                left = false;
+                anim.SetBool("RunLeft", false);
+                animator.SetBool(s_left, false);
+            }
+        }
+        if(origin)
+        {
+
+            origin = false;
+
+            anim.SetTrigger("jump_origin");
+            animator.SetBool(s_jump_origin, false);
         }
     }
 }
