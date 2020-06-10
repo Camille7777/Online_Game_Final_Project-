@@ -139,8 +139,13 @@ public class PlayerMovementController : MonoBehaviour
             verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
             rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
+
+            anim.SetTrigger("falldown");
+            Invoke("fall", 1.0f);
+             //anim.SetTrigger("TurnLeft");
             anim.SetTrigger("Jump");
-            Jump();
+            anim.SetTrigger("falldown");
+           Jump();
             m_Jumping = true;
         }
 
@@ -148,21 +153,25 @@ public class PlayerMovementController : MonoBehaviour
         {
             //anim.SetTrigger("RunLeft");
 
+            anim.SetTrigger("TurnLeft");
+            anim.SetBool("RunLeft", true);
             animator.SetBool(s_left, true);
 
             //animator.SetBool(s_left, false);
 
 
-            anim.SetBool("RunLeft", true);
+            
             left = true;
             //Slide();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-             //anim.SetTrigger("RunRight");
-           // Slide();
+            //anim.SetTrigger("RunRight");
+            // Slide();
+
+            anim.SetTrigger("TurnRight");
             animator.SetBool(s_right, true);
-            anim.SetBool("RunRight", true);
+           // anim.SetBool("RunRight", true);
             right = true;
             //animator.SetBool(s_right, false);
             //Slide();
@@ -177,16 +186,20 @@ public class PlayerMovementController : MonoBehaviour
             Jump();
 
             m_Jumping = true;*/
-            anim.SetTrigger("jump_origin");
-            animator.SetBool(s_jump_origin, true);
-            origin = true;
+
+
+           // anim.SetTrigger("jump_origin");
+            //animator.SetBool(s_jump_origin, true);
+            //origin = true;
 
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            anim.SetTrigger("RunBackward");
-            animator.SetBool(s_SlidingHash, true);
+            anim.SetTrigger("Backward");
             anim.SetBool("RunBackward", true);
+            //anim.SetTrigger("RunBackward");
+            animator.SetBool(s_SlidingHash, true);
+            //anim.SetBool("RunBackward", true);
             backward = true;
             //if (!m_Sliding)
               //  Slide();
@@ -273,6 +286,12 @@ public class PlayerMovementController : MonoBehaviour
 
            // characterCollider.Slide(false);
         }
+    }
+
+    void fall()
+    {
+
+        anim.SetTrigger("falldown");
     }
     public void Slide()
     {
