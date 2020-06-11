@@ -13,7 +13,7 @@ public class StartAni : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
 	{ 
-		if (other.gameObject.tag == "line") 
+		if (other.gameObject.tag == "Player") 
 		{
 			for (int i = 0; i < Obj.Length; i++)
 			{
