@@ -6,6 +6,8 @@ public class WaveGenerator : MonoBehaviour {
 	public float amplitude = 2;
 	public float frequency = 2;
 	public float startMoving = 0;
+	public CharacterController character;
+
 	public char xyz = 'x';
 	float angle = 0;
 	float original = 0;
@@ -38,6 +40,6 @@ public class WaveGenerator : MonoBehaviour {
 
 		m_velocity = (transform.position - pos) / Time.fixedDeltaTime;
 		transform.position = pos;
-
+		character.attachedRigidbody.position = pos;
 	}
 }

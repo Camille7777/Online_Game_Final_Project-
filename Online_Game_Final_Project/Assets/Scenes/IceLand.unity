@@ -1425,6 +1425,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.6
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &35237269
@@ -8355,6 +8356,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.6
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &101948211
@@ -9408,6 +9410,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0
+  character: {fileID: 0}
   xyz: 122
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &128664432
@@ -10398,6 +10401,7 @@ MonoBehaviour:
   amplitude: 4
   frequency: 10
   startMoving: 0
+  character: {fileID: 1881017795}
   xyz: 120
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &158116439
@@ -10788,6 +10792,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &164361287
@@ -30302,6 +30307,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.4
+  character: {fileID: 1881017795}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &314694364
@@ -36087,6 +36093,7 @@ MonoBehaviour:
   amplitude: 5
   frequency: 9
   startMoving: 0
+  character: {fileID: 1881017795}
   xyz: 122
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &346887206
@@ -38748,6 +38755,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.82
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &396882550
@@ -39298,6 +39306,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 5
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &410976978
@@ -39388,6 +39397,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &411962303
@@ -41340,6 +41350,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.8
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &454078500
@@ -42037,6 +42048,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &467750792
@@ -47418,6 +47430,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.8
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &623191597
@@ -48191,6 +48204,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.4
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!64 &640353851
@@ -52753,6 +52767,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.4
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &788274310
@@ -69566,6 +69581,7 @@ MonoBehaviour:
   amplitude: 5
   frequency: 1
   startMoving: 5
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1132017473
@@ -70248,6 +70264,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.6
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1145991738
@@ -73091,6 +73108,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1218287307
@@ -78873,6 +78891,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1358128616
@@ -78963,6 +78982,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.82
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361160050
@@ -80144,6 +80164,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.2
+  character: {fileID: 1881017795}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1398608474
@@ -87416,6 +87437,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1458608400
@@ -97713,6 +97735,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 1.4
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1583323990
@@ -98835,6 +98858,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 0.6
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1607149299
@@ -109094,6 +109118,7 @@ MonoBehaviour:
   amplitude: 4
   frequency: 5
   startMoving: 0
+  character: {fileID: 1881017795}
   xyz: 120
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1863254175
@@ -109571,6 +109596,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 2
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1876691476
@@ -109935,6 +109961,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1226497655, guid: 57bb9dc1fb68744429b341ee1c044f5e,
     type: 3}
   m_PrefabInstance: {fileID: 1880668817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1881017795 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 469181397755128226, guid: f7b65dcf3709fb3488b00070a89ef861,
+    type: 3}
+  m_PrefabInstance: {fileID: 680511912}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1882129385
 PrefabInstance:
@@ -112318,6 +112350,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 8
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1938508600
@@ -113997,6 +114030,7 @@ MonoBehaviour:
   amplitude: 20
   frequency: 1
   startMoving: 10
+  character: {fileID: 0}
   xyz: 121
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1997128226
@@ -124188,6 +124222,7 @@ MonoBehaviour:
   amplitude: 2
   frequency: 5
   startMoving: 0
+  character: {fileID: 1881017795}
   xyz: 120
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!33 &7865478705322415206

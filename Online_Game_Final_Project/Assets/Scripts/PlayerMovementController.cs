@@ -18,7 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     private float CameraUpAndDownRotation = 0f;
     private float CurrentCameraUpAndDownRotation = 0f;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     public PlayerMovementController instance = null;
 
     public float jumpForce = 300;
