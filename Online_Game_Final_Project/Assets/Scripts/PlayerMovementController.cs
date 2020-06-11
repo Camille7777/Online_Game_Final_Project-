@@ -58,10 +58,15 @@ public class PlayerMovementController : MonoBehaviour
     private float m_Timer;
     private float m_Timer2;
     private int m_Second;
+    private int gravity;
     //protected const float k_GroundingSpeed = 80f;
     // Start is called before the first frame update
     void Start()
     {
+        gravity = -10;
+
+        //gravity = -35;//-35;
+        Physics.gravity = new Vector3(0, gravity, 0);
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
@@ -129,19 +134,26 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
+            anim.SetTrigger("idel");
             anim.SetInteger("Walk", 0);
             m_Moving = false;
         }
 
         if (Input.GetButtonDown("Jump") && Time.time > canJump)
         {
+            gravity = 0;
 
+            //gravity = -35;//-35;
+            Physics.gravity = new Vector3(0, gravity, 0);
+            //  Physics.gravity.false;
             verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
-            rb.AddForce(0, jumpForce, 0);
             canJump = Time.time + timeBeforeNextJump;
+            rb.velocity += new Vector3(0, 5, 0);
+            rb.AddForce(0, jumpForce, 0);
+            //Physics.gravity = new Vector3(0, gravity, 0);
 
             anim.SetTrigger("falldown");
-            Invoke("fall", 1.0f);
+            Invoke("fall", 0.3f);
              //anim.SetTrigger("TurnLeft");
             anim.SetTrigger("Jump");
             anim.SetTrigger("falldown");
@@ -149,7 +161,36 @@ public class PlayerMovementController : MonoBehaviour
             m_Jumping = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            rb.velocity += new Vector3(0, 1, 0);
+            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            anim.SetInteger("Walk", 1);
+            m_Moving = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetTrigger("left");
+            anim.SetBool("RunLeft", true);
+            left = true;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            anim.SetTrigger("right");
+            anim.SetBool("RunRight", true);
+            right = true;
+        }
+
+
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            anim.SetTrigger("Backward");
+            anim.SetBool("RunBackward",true);
+            anim.SetInteger("Back", 1);
+            backward = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             //anim.SetTrigger("RunLeft");
 
@@ -188,9 +229,29 @@ public class PlayerMovementController : MonoBehaviour
             m_Jumping = true;*/
 
 
-           // anim.SetTrigger("jump_origin");
+            // anim.SetTrigger("jump_origin");
             //animator.SetBool(s_jump_origin, true);
             //origin = true;
+            gravity = -10;
+
+            //gravity = -35;//-35;
+            Physics.gravity = new Vector3(0, gravity, 0);
+            //  Physics.gravity.false;
+            verticalTargetPosition.y = Mathf.Sin(Mathf.PI) * jumpHeight;
+            canJump = Time.time + timeBeforeNextJump;
+            rb.velocity += new Vector3(0, 15, 0);
+            rb.AddForce(0, jumpForce, 0);
+            //Physics.gravity = new Vector3(0, gravity, 0);
+
+            //anim.SetTrigger("falldown");
+            Invoke("fall", 0.3f);
+            //anim.SetTrigger("TurnLeft");
+            anim.SetTrigger("Jump2");
+            //anim.SetTrigger("falldown");
+            //Jump();
+           // m_Jumping = true;
+
+
 
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -204,7 +265,7 @@ public class PlayerMovementController : MonoBehaviour
             //if (!m_Sliding)
               //  Slide();
         }
-       Invoke("stop", 2.0f);
+       Invoke("stop", 1.0f);
 
         if (m_Sliding)
         {
@@ -292,6 +353,9 @@ public class PlayerMovementController : MonoBehaviour
     {
 
         anim.SetTrigger("falldown");
+        gravity = -30;//-35;
+        Physics.gravity = new Vector3(0, gravity, 0);
+        //rb.AddForce(0, jumpForce, 0);
     }
     public void Slide()
     {
