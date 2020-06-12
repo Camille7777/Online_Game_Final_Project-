@@ -39,11 +39,11 @@ public class WaveGenerator : MonoBehaviour {
 			Debug.Log("HHHH");
 			rb.velocity = new Vector3(Mathf.Sin(angle) * amplitude, 0, 0);
 		}
-		//pos.x = original + Mathf.Sin(angle) * amplitude;
+		
 		else if (xyz == 'y')
-			pos.y = original + Mathf.Sin(angle) * amplitude;
+			rb.velocity = new Vector3( 0, Mathf.Sin(angle) * amplitude, 0);
 		else
-			pos.z = original + Mathf.Sin(angle) * amplitude;
+			rb.velocity = new Vector3( 0, 0, Mathf.Sin(angle) * amplitude);
 		transform.position = pos;
 	}
 }
