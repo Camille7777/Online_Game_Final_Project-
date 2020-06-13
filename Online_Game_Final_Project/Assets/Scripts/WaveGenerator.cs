@@ -10,18 +10,14 @@ public class WaveGenerator : MonoBehaviour {
 	
 
 
-	public char xyz = 'x';
+	public char dimension1 = 'x';
+	public char dimension2 ;
 	float angle = 0;
-	float original = 0;
+	
 	
 	void Start(){
 		rb = GetComponent<Rigidbody>();
-		if(xyz=='x')
-			original = transform.position.x;
-		else if (xyz=='y')
-			original = transform.position.y;
-		else
-			original = transform.position.z;
+	
 	}
 	
 	// Update is called once per frame
@@ -34,15 +30,19 @@ public class WaveGenerator : MonoBehaviour {
 		angle += Time.deltaTime * frequency;
 		Vector3 pos = transform.position;
 
-		if (xyz == 'x')
-		{
-			Debug.Log("HHHH");
+
+
+		if (dimension1 == 'x' && dimension2 == 'y')
+		{ 
+			rb.velocity = new Vector3(0, Mathf.Sin(angle) * amplitude, Mathf.Cos(angle) * amplitude);
+			Debug.Log("Time.deltaTime="+Time.deltaTime);
+		Debug.Log(Mathf.Cos(angle) + "*" + amplitude + "=" + Mathf.Cos(angle) * amplitude);
+		}  
+		else if (dimension1 == 'x')
 			rb.velocity = new Vector3(Mathf.Sin(angle) * amplitude, 0, 0);
-		}
-		
-		else if (xyz == 'y')
+		else if (dimension1 == 'y')
 			rb.velocity = new Vector3( 0, Mathf.Sin(angle) * amplitude, 0);
-		else
+		else if  (dimension1 == 'z')
 			rb.velocity = new Vector3( 0, 0, Mathf.Sin(angle) * amplitude);
 		transform.position = pos;
 	}

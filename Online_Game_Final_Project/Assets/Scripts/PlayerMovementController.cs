@@ -21,7 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     public Rigidbody rb;
     public PlayerMovementController instance = null;
 
-    public float jumpForce = 300;
+    public float jumpForce = 200;
     public float timeBeforeNextJump = 1.2f;
     private float canJump = 0f;
     Animator anim;
@@ -76,7 +76,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         //fpsCamera.transform.RotateAround(rb.transform.position, Vector3.up, 10);
-        fpsCamera.transform.Translate(new Vector3(-5f, 0f, 7f));//-5f, 0f, 7f
+        fpsCamera.transform.Translate(new Vector3(-5f, 1.5f, 7f));//-5f, 0f, 7f
 
         m_Sliding = false;
         m_SlideStart = 0.0f;
