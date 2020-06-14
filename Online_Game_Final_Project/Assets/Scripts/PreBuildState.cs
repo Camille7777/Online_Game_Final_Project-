@@ -13,10 +13,7 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
     public GameObject playerTransparentPrefab;
     public GameObject[] traps;
     public Action CallBack;
-    private GameObject Objplayer_1;
-    private GameObject Objplayer_2;
-    private GameObject Objplayer_3;
-    private GameObject Objplayer_4;
+   
     
     public float buildStateTimeLimit ;
     private float timer;
@@ -40,6 +37,7 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
         {
             _customroomproperties.Add("Global_destination_Var", 0);
             _customroomproperties.Add("Round", 1);
+            _customroomproperties.Add("Global_death_quantity",0);
 
             Debug.Log("room properties created");
             PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
@@ -58,10 +56,18 @@ public class PreBuildState : MonoBehaviourPunCallbacks,Istate
                 //reset the room properties to 0 because the round is renewed
                 _customroomproperties["Global_destination_Var"] = 0;
                 _customroomproperties["Round"] = currentround;
+                _customroomproperties["Global_death_quantity"] = 0;
+
                 //update the round
                 PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
                 
             }
+
+
+            //reset all the local player health to 3
+            
+            PhotonNetwork.LocalPlayer.CustomProperties["Health"] = PlayerBehaviour.instance.startHealth;
+
 
             Debug.Log("Round" + currentround);
         }

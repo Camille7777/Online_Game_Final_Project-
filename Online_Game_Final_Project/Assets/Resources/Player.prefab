@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: -4820503163827411996}
   - component: {fileID: 1477232961274354605}
   - component: {fileID: 6770067053655701208}
+  - component: {fileID: 7839370388554483329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -400,6 +401,7 @@ MonoBehaviour:
   speed: 8
   lookSensitivity: 3
   fpsCamera: {fileID: 34697231}
+  rb: {fileID: 0}
   instance: {fileID: 0}
   jumpForce: 300
   timeBeforeNextJump: 1.2
@@ -454,6 +456,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FPSCamera: {fileID: 34697231}
   playerNameText: {fileID: 3823900626473789444}
+--- !u!95 &7839370388554483329
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428590389759515687}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93e3c2b08cdddef48a084d8def08276c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2826307872774015663
 GameObject:
   m_ObjectHideFlags: 0

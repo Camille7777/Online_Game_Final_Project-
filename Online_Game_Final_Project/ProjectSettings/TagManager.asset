@@ -9,6 +9,7 @@ TagManager:
   - Trap
   - BigFan
   - Gun
+  - TrapForChoose
   layers:
   - Default
   - TransparentFX

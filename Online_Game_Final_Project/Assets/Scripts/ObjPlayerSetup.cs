@@ -37,7 +37,7 @@ public class ObjPlayerSetup : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            GameManager.instance.RandomTrap();
+           
             photonView.RPC("AddcustomChild", RpcTarget.AllBuffered, GameManager.instance.assignned_child_trap);//1
         }
     }
@@ -45,8 +45,8 @@ public class ObjPlayerSetup : MonoBehaviourPunCallbacks
     [PunRPC]
     private void AddcustomChild(int whichprefab)
     {
-        prefab_value = whichprefab;
-        //Debug.Log(prefab_value);
+       // prefab_value = whichprefab;
+        Debug.Log("the prefab "+whichprefab+"should be spawn");
 
 
         GameObject trap_1 = GameObject.Instantiate(GameManager.instance.traps[whichprefab],transform.position, Quaternion.identity,this.transform);

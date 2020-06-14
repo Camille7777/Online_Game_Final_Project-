@@ -21,7 +21,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
     public Action WinCallBack;
     public Action LostCallBack;
-    private bool player_spawned = false;
+    
 
     public ExitGames.Client.Photon.Hashtable _customroomproperties = new ExitGames.Client.Photon.Hashtable();
 
@@ -72,7 +72,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
         
         //if never spawn any player
-        if (!player_spawned)
+        if (!GameManager.instance.player_spawned)
         {
 
             // spawn the new proper players
@@ -86,7 +86,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
             //}
 
             //player spawned
-            player_spawned = true;
+            GameManager.instance.player_spawned = true;
         }
         else
         { //else no need spawn alrd but need to regain control
@@ -94,7 +94,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
             foreach (GameObject Player in GameManager.instance.Playerslist)
             {
                 //revoke the move
-
+                Player.transform.position = BattleStateStartingPoint.position;
                // Player.GetComponent<PlayerMovementController>().speed=8;
                 Player.GetComponent<PlayerMovementController>().enabled = true;
 
@@ -122,6 +122,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
         BattleState_Timer += Time.deltaTime * 1;
         //if within timer
        
+
         // if time limit exceed
         if (BattleState_Timer>BattleState_TimeLimit)
         {
@@ -197,7 +198,7 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                             Player.GetComponent<PhotonView>().Owner);
 
                         
-                        //if currentround== round limit && all player reached
+                       
                         //if(currentround>=roundlimit&&current_sequence== )
                         //{
                         //    //tell other ppl, all the player reach the destination // and go to result state 
@@ -209,21 +210,11 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
 
                     }
 
-
-                    //reset the timer to 0 so that system would not think is lose.
-                   // BattleState_Timer = 0;
-
-                    //wait for others
-
-
-                    // when everyone reached
-                    
-                  
                    
                 }
-
-                if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
-                {
+                //if currentround== round limit && all player reached
+                if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_destination_Var"))
+                {           // when everyone reached
                     if (
                         ((int)PhotonNetwork.CurrentRoom.CustomProperties["Global_destination_Var"] == PhotonNetwork.PlayerList.Length)
                         &&
@@ -235,6 +226,29 @@ public class BattleState : MonoBehaviourPunCallbacks,Istate
                         WinCallBack();
                     }
                 }
+                //always refresh the death ppl quantity
+                if(PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Health"))
+                {
+                    if((int)PhotonNetwork.LocalPlayer.CustomProperties["Health"] == 0)
+                    {
+                        int current_quantity_of_deathPlayer = (int)PhotonNetwork.CurrentRoom.CustomProperties["Global_death_quantity"];
+                        current_quantity_of_deathPlayer += 1;
+                        _customroomproperties["Global_death_quantity"] = current_quantity_of_deathPlayer;
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(_customroomproperties);
+                    }
+                }
+
+                // if all people die
+                if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Global_death_quantity"))
+                {
+                    if((int)PhotonNetwork.CurrentRoom.CustomProperties["Global_death_quantity"]== PhotonNetwork.PlayerList.Length)
+                    {
+                        LostCallBack();
+                    }
+                }
+
+
+                
 
                
 

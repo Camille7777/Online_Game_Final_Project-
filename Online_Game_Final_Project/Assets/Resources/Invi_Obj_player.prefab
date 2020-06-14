@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 6910639333753159409}
   - component: {fileID: 5405232869369012898}
   m_Layer: 0
-  m_Name: Invi_player
+  m_Name: Invi_Obj_player
   m_TagString: Obj_Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

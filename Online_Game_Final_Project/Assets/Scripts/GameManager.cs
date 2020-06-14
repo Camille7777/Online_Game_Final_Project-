@@ -10,14 +10,23 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
 
     private StateMachine stateMachine;
+    private ChoosingState choose = new ChoosingState();
     private PreBuildState build = new PreBuildState();
     private BattleState battle = new BattleState();
     private ResultState result = new ResultState();
     public List<GameObject> objectPlayers = new List<GameObject>();
     public List<GameObject> Playerslist = new List<GameObject>();
     public int assignned_child_trap=0;
-    
 
+    public bool player_spawned = false;
+
+    #region Assets for ChoosingScene
+    public GameObject GameplayerTransparentPrefab;
+    public Transform ChoosespawnLocation;
+    public Transform ChooseState_Players_spawnLocation;
+    public GameObject[] traps_available_for_player;
+    public float ChooseStateTimeLimit = 15f;
+    #endregion
 
     #region Assets for PrebuildScene
     public Transform spawnLocation;
@@ -66,12 +75,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         stateMachine = GetComponent<StateMachine>();
         if (PhotonNetwork.IsConnected)
         {
-            if (playerTransparentPrefab != null)
-            {
-                objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
-            }
 
-            GotoPrebuild();
+             
+
+
+            //if (playerTransparentPrefab != null)
+            //{
+            //    PhotonNetwork.Instantiate(GameplayerTransparentPrefab.name, ChooseState_Players_spawnLocation.position, Quaternion.identity);
+            //    GameManager.instance.player_spawned = true;
+            //}
+            gotoChooseState();
         }
       
     }
@@ -82,10 +95,24 @@ public class GameManager : MonoBehaviourPunCallbacks
         stateMachine.UpdateState();
     }
 
-    private void GotoPrebuild()
+    private void gotoChooseState()
     {
-       
+        Debug.Log("choosing state is start");
+
+        
+        stateMachine.changeState(Choose());
+    }
+
+    private void ChooseStateCallBack()
+    {
+        Debug.Log("choosing state is end");
+        if (playerTransparentPrefab != null)
+        {
+            objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
+        }
+
         stateMachine.changeState(Build());
+        Debug.Log("prebuild start");
     }
 
     
@@ -136,17 +163,23 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("result state is end");
 
-        if (playerTransparentPrefab != null)
-        {
+        
 
-            objectPlayers.Add(PhotonNetwork.Instantiate(playerTransparentPrefab.name, spawnLocation.position, Quaternion.identity));
-        }
-        //then only go build again
-        stateMachine.changeState(Build());
-       
+        //then only go choose again
+        stateMachine.changeState(Choose());
+        Debug.Log("choosing state is start");
     }
 
-
+    private ChoosingState Choose()
+    {
+        choose.ChooseState_Traps_spawnLocation = ChoosespawnLocation;
+        choose.traps_available_for_player = traps_available_for_player;
+        choose.ChooseState_Players_spawnLocation = ChooseState_Players_spawnLocation;
+        choose.CallBack = ChooseStateCallBack;
+       choose.ChooseStateTimeLimit = ChooseStateTimeLimit;
+        
+        return choose;
+    }
 
     private PreBuildState Build()
     {
@@ -162,10 +195,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     private BattleState Battle()
     {
         //run all the scripts attached on the traps
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
-        {
-            obj.transform.GetChild(0).gameObject.SetActive(true);
-        }
+        //foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Trap"))
+        //{
+        //    obj.transform.GetChild(0).gameObject.SetActive(true);
+        //}
 
         battle.BattleStateStartingPoint=BattleStateStartingPoint;
         battle.BattleStateDestination= BattleStateDestination;
@@ -189,11 +222,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         return result;
     }
 
-    public void RandomTrap()
-    {
-        int RandomTrap = UnityEngine.Random.Range(0, traps.Length);
-        assignned_child_trap = RandomTrap;
-    }
+   
 
     public override void OnJoinedRoom()
     {

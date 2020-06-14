@@ -103,10 +103,13 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         }
         */
 
-       // pList[].NickName;
-        string score=(string)pList[0].CustomProperties["Score"];
-        string round = (string)PhotonNetwork.CurrentRoom.CustomProperties["Round"];
+        // pList[].NickName;
+        // string score=(string)pList[0].CustomProperties["Score"];
+        //string round = (string)PhotonNetwork.CurrentRoom.CustomProperties["Round"];
 
+        //***************************************
+        // NEW!!!!!!!!!!!!!!!! health UI
+        //health=PhotonNetwork.LocalPlayer.CustomProperties["Health"];
 
     }
 

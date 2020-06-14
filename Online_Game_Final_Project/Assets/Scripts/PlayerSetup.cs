@@ -18,22 +18,27 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             transform.GetComponent<PlayerMovementController>().enabled = true;
+            transform.GetComponent<PlayerBehaviour>().enabled = true;
             FPSCamera.GetComponent<Camera>().enabled = true;
         }
         else
         {
             transform.GetComponent<PlayerMovementController>().enabled = false;
+            transform.GetComponent<PlayerBehaviour>().enabled = false;
             FPSCamera.GetComponent<Camera>().enabled = false;
         }
 
         SetPlayerUI();
+       // SetPlayerAssets();
     }
+
+   
 
     void SetPlayerUI()
     {
         if (playerNameText != null)
         {
-            playerNameText.text = photonView.Owner.NickName;
+            playerNameText.text = PhotonNetwork.LocalPlayer.NickName;
         }
     }
 }
